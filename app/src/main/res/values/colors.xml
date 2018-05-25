@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="black">#000000</color>
+    <color name="touming">#e0F7F7F7</color>
+    <color name="btntextcolor">#ff1E90FF</color><!--dialog中按钮字体颜色 -->
+    <!-- 透明00 半透明e0 -->
+    <color name="province_line_border">#C7C7C7</color>
+    <color name="toumingbai">#99ffffff</color>
+    <color name="touming_mohu">#99000000</color>
+    <color name="bantouming_hongse">#3f701006</color>
+    <color name="bantouming_zise">#3f612175</color>
+    <color name="title_down_zise">#530c69</color>
+    <color name="white">#ffffff</color>
+    <color name="gray">#ffe5e5e5</color>
+    <color name="home_back_unselected">#878787</color>
+    <color name="home_back_selected">#18B4ED</color>
+    <color name="bbt_lanse">#D31E13</color>
+</resources>

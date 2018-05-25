@@ -1,0 +1,5 @@
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--<files-path name="com.zprmb.udzt.file_provider" path="demo" />-->
+    <files-path name="name1" path="xmrxbbtdemo" />
+    <external-path name="external" path="/"/>
+</paths>
