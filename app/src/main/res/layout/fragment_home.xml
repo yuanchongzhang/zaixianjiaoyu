@@ -2,12 +2,33 @@
               xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:orientation="vertical">
- <TextView
+              android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    android:background="@color/white"
+    >
+ <com.project.zaixianjiaoyu.banner.Banner
+     android:id="@+id/banner"
      android:layout_width="match_parent"
-     android:layout_height="wrap_content"
-
-     android:text="首页"
-
+     android:layout_height="@dimen/dp_180"
+     app:indicator_drawable_selected="@drawable/bannselected"
+     app:indicator_drawable_unselected="@drawable/bannerunselected"
      />
+
+ <!--    SimpleMarqueeView-->
+ <com.project.zaixianjiaoyu.paomadeng.SimpleMarqueeView
+     android:id="@+id/simpleMarqueeView"
+     android:layout_width="match_parent"
+     android:layout_height="@dimen/dp_30"
+
+android:background="@color/gray"
+     android:flipInterval="2500"
+     android:inAnimation="@anim/in_right"
+     android:outAnimation="@anim/out_left"
+     app:marqueeAnimDuration="2000"
+     app:smvTextColor="@color/black"
+     app:smvTextEllipsize="end"
+
+     app:smvTextGravity="center_vertical"
+     app:smvTextSingleLine="true"
+     app:smvTextSize="15sp" />
 </LinearLayout>

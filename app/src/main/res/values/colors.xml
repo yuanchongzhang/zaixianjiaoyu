@@ -19,4 +19,6 @@
     <color name="home_back_unselected">#878787</color>
     <color name="home_back_selected">#18B4ED</color>
     <color name="bbt_lanse">#D31E13</color>
+
+    <color name="status_bar">#393A3E</color>
 </resources>
