@@ -26,132 +26,86 @@
      android:background="@color/white"
   />
 
+
  <LinearLayout
      android:layout_width="match_parent"
      android:layout_height="wrap_content"
-     android:layout_marginLeft="@dimen/dp_18"
-     android:layout_marginRight="@dimen/dp_18"
-     android:layout_marginTop="@dimen/dp_60"
-     android:background="@color/white"
-     android:orientation="vertical">
+     android:orientation="horizontal"
+     android:layout_marginLeft="@dimen/dp_20"
+     >
 
-  <TextView
-      android:id="@+id/text_phone"
-      android:layout_width="wrap_content"
+  <EditText
+      android:id="@+id/user_phone_num"
+      android:layout_width="0dp"
+      android:layout_weight="1"
       android:layout_height="wrap_content"
-      android:layout_marginLeft="@dimen/dp_5"
-      android:text="请输入手机号"
-      android:textColor="#666666"
-      android:textSize="@dimen/sp_13"
-      android:visibility="gone" />
+      android:layout_centerVertical="true"
 
-  <RelativeLayout
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:layout_weight="1">
+      android:layout_marginTop="@dimen/dp_10"
+      android:background="@null"
+      android:hint="请输入用户名"
+      android:inputType="phone"
+      android:maxLength="11"
 
+      android:textColor="#333333"
+      android:textColorHint="#999999"
+      android:textSize="46px" />
 
-   <EditText
-       android:id="@+id/user_phone_num"
-       android:layout_width="900px"
-       android:layout_height="wrap_content"
-       android:layout_centerVertical="true"
-       android:layout_marginTop="@dimen/dp_10"
-       android:background="@null"
-       android:hint="请输入用户名"
-       android:inputType="phone"
-       android:maxLength="11"
-       android:paddingLeft="@dimen/dp_5"
-       android:textColor="#333333"
-       android:textColorHint="#999999"
-       android:textSize="46px" />
+  <ImageView
+      android:id="@+id/img_clear_user"
+      android:layout_width="@dimen/dp_20"
+      android:layout_height="@dimen/dp_20"
+      android:layout_alignParentRight="true"
+      android:layout_centerVertical="true"
+      android:background="@drawable/close2"
+      android:gravity="center"
+      android:layout_gravity="center"
+      android:layout_marginRight="@dimen/dp_30"
+      android:visibility="visible" />
 
-   <ImageView
-       android:id="@+id/img_clear_user"
-       android:layout_width="@dimen/dp_20"
-       android:layout_height="@dimen/dp_20"
-       android:layout_alignParentRight="true"
-       android:layout_centerVertical="true"
-       android:background="@drawable/close2"
-       android:gravity="center"
-       android:visibility="gone" />
-
-
-  </RelativeLayout>
-
-  <View
-      android:layout_width="match_parent"
-      android:layout_height="1px"
-      android:layout_marginTop="15px"
-      android:background="#DBDBDB" />
-
-  <RelativeLayout
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:layout_weight="1">
-
-   <TextView
-       android:id="@+id/text_duanxincode"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:layout_marginLeft="@dimen/dp_5"
-       android:layout_marginTop="@dimen/dp_8"
-       android:text="请输入密码"
-       android:textColor="#666666"
-       android:textSize="@dimen/sp_13"
-       android:visibility="gone" />
-
-   <EditText
-       android:id="@+id/user_password"
-       android:layout_width="900px"
-       android:layout_height="wrap_content"
-
-       android:layout_alignParentTop="true"
-       android:layout_below="@+id/text_duanxincode"
-       android:layout_marginTop="@dimen/dp_28"
-       android:background="@null"
-       android:hint="请输入密码"
-       android:inputType="textPassword"
-       android:maxLength="18"
-       android:paddingLeft="@dimen/dp_5"
-       android:textColor="#333333"
-       android:textColorHint="#999999"
-       android:textSize="46px" />
-
-   <LinearLayout
-       android:id="@+id/li_opera"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:layout_alignParentRight="true"
-       android:layout_below="@+id/text_duanxincode"
-       android:layout_centerVertical="true"
-       android:layout_marginRight="50px"
-       android:gravity="center"
-       android:orientation="horizontal"
-       android:visibility="gone">
-
-    <ImageView
-        android:id="@+id/img_clear"
-        android:layout_width="@dimen/dp_20"
-        android:layout_height="@dimen/dp_20"
-        android:layout_marginRight="68px"
-        android:background="@drawable/close2" />
-
-    <ImageView
-        android:id="@+id/img_pass"
-        android:layout_width="65px"
-        android:layout_height="35px"
-        android:background="@drawable/yan2" />
-   </LinearLayout>
-  </RelativeLayout>
-
-
-  <View
-      android:layout_width="match_parent"
-      android:layout_height="1px"
-      android:layout_marginTop="15px"
-      android:background="#DBDBDB" />
  </LinearLayout>
+ <View
+     android:layout_width="match_parent"
+     android:layout_height="1px"
+     android:layout_marginTop="@dimen/dp_10"
+     android:background="#DBDBDB" />
+
+ <LinearLayout
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:orientation="horizontal"
+     android:layout_marginLeft="@dimen/dp_20"
+     >
+
+  <EditText
+      android:id="@+id/edit_pwd"
+      android:layout_width="0dp"
+      android:layout_weight="1"
+      android:layout_height="wrap_content"
+      android:layout_centerVertical="true"
+
+      android:layout_marginTop="@dimen/dp_10"
+      android:background="@null"
+      android:hint="请输入密码"
+      android:inputType="phone"
+      android:maxLength="11"
+
+      android:textColor="#333333"
+      android:textColorHint="#999999"
+      android:textSize="46px" />
+
+  <ImageView
+      android:id="@+id/img_clear12"
+      android:layout_width="@dimen/dp_20"
+      android:layout_height="@dimen/dp_20"
+      android:layout_marginRight="68px"
+      android:background="@drawable/close2"
+      android:layout_gravity="center"
+      />
+
+ </LinearLayout>
+
+
 
 
  <Button
@@ -166,6 +120,6 @@
      android:enabled="true"
      android:text="登录"
      android:textColor="@color/white"
-     android:textSize="40px" />
+     android:textSize="@dimen/sp_14" />
 
 </LinearLayout>
