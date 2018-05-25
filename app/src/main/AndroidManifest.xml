@@ -90,6 +90,8 @@
 
         </activity>
 <activity android:name=".activity.Loginactivity"></activity>
+        <activity android:name=".activity.ForgetActivity"></activity>
+
     </application>
 
 </manifest>
