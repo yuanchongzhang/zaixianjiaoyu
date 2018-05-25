@@ -3,13 +3,80 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:fitsSystemWindows="true"
     >
     <include
         layout="@layout/v6login_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_19" />
+    />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:background="#EFEFF4"
+        >
+
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/dp_15"
+            android:text="手机号"
+            android:textColor="#333333"
+            android:textSize="@dimen/sp_14" />
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/dp_5"
+        >
+        <EditText
+            android:id="@+id/user_phone_num"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+
+            android:background="@null"
+            android:hint="请输入手机号码"
+            android:inputType="phone"
+            android:layout_weight="1"
+            android:maxLength="11"
+            android:textColor="#333333"
+            android:textColorHint="#999999"
+            android:textSize="45px" />
+
+        <ImageView
+            android:id="@+id/img_clear_user"
+            android:layout_width="@dimen/dp_20"
+            android:layout_height="@dimen/dp_20"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="50px"
+            android:background="@drawable/close2"
+            android:gravity="center"
+            android:visibility="visible" />
+
+
+    </LinearLayout>
+
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="140px"
+
+        android:paddingLeft="@dimen/dp_10">
+
+
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,47 +94,9 @@
             android:orientation="vertical">
 
 
-            <TextView
 
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/dp_15"
-                android:text="手机号码"
-                android:textColor="#333333"
-                android:textSize="40px" />
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="140px"
 
-                android:paddingLeft="@dimen/dp_10">
-
-                <EditText
-                    android:id="@+id/user_phone_num"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginBottom="@dimen/dp_6"
-                    android:background="@null"
-                    android:hint="请输入手机号码"
-                    android:inputType="phone"
-                    android:maxLength="11"
-                    android:textColor="#333333"
-                    android:textColorHint="#999999"
-                    android:textSize="45px" />
-
-                <ImageView
-                    android:id="@+id/img_clear_user"
-                    android:layout_width="@dimen/dp_20"
-                    android:layout_height="@dimen/dp_20"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="50px"
-                    android:background="@drawable/close2"
-                    android:gravity="center"
-                    android:visibility="gone" />
-            </RelativeLayout>
 
         </LinearLayout>
 
