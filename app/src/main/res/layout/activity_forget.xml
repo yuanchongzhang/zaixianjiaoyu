@@ -77,7 +77,7 @@ android:background="@color/white"
         android:background="@color/white"
         >
         <EditText
-            android:id="@+id/user_phone_num"
+            android:id="@+id/edit_userphone"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -94,7 +94,7 @@ android:background="@color/white"
             android:textSize="45px" />
 
         <ImageView
-            android:id="@+id/img_clear_user"
+            android:id="@+id/img_clearphone"
             android:layout_width="@dimen/dp_20"
             android:layout_height="@dimen/dp_20"
             android:layout_alignParentRight="true"
@@ -102,7 +102,7 @@ android:background="@color/white"
             android:layout_marginRight="@dimen/dp_120"
             android:background="@drawable/close2"
             android:gravity="center"
-            android:visibility="visible" />
+            android:visibility="gone" />
 
 
     </LinearLayout>
@@ -125,7 +125,7 @@ android:background="@color/white"
         android:background="@drawable/v6_captcha_shape"
         android:text="发送验证码"
         android:textColor="#20A8FF"
-        android:textSize="@dimen/sp_14"
+        android:textSize="@dimen/sp_12"
         android:visibility="visible" />
 </RelativeLayout>
     <View
@@ -167,7 +167,7 @@ android:background="@color/white"
 
         <EditText
 
-            android:id="@+id/text_smscode"
+            android:id="@+id/edit_sms"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
@@ -182,7 +182,7 @@ android:background="@color/white"
             android:textColorHint="#999999"
             android:textSize="45px" />
         <ImageView
-            android:id="@+id/img_clear_sms"
+            android:id="@+id/imgclearsms"
             android:layout_width="@dimen/dp_20"
             android:layout_height="@dimen/dp_20"
             android:layout_centerVertical="true"
@@ -192,7 +192,7 @@ android:background="@color/white"
             android:gravity="center"
 android:layout_marginRight="@dimen/dp_40"
 
-            android:visibility="visible" />
+            android:visibility="gone" />
 
     </LinearLayout>
 
