@@ -123,9 +123,9 @@ public class HomeFragment extends Fragment implements OnBannerListener {
         marqueeView.setOnItemClickListener(new OnItemClickListener<TextView, String>() {
             @Override
             public void onItemClickListener(TextView mView, String mData, int mPosition) {
-                ToastUtil.showCenterToast(getActivity(), mPosition + "");
-                startActivity(new Intent(getActivity(),HomeDetailActivity.class));
-
+//                ToastUtil.showCenterToast(getActivity(), mPosition + "");
+//                startActivity(new Intent(getActivity(),HomeDetailActivity.class));
+startActivity(new Intent(getActivity(),WebViewActivity.class));
 
             }
         });
@@ -173,7 +173,8 @@ public class HomeFragment extends Fragment implements OnBannerListener {
         adapter.setOnItemClickListener(new SimpleAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Toast.makeText(getActivity(), position+"", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), position+"", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getActivity(),HomeDetailActivity.class));
             }
         });
 

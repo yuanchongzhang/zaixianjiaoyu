@@ -50,8 +50,10 @@
 
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".activity.SplashActivity">
+            android:screenOrientation="portrait"
+           ></activity>
+        <activity android:name=".activity.SplashActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -99,10 +101,18 @@
             android:launchMode="singleTop">
 
         </activity>
-<activity android:name=".activity.Loginactivity"></activity>
-        <activity android:name=".activity.ForgetActivity"></activity>
+<activity android:name=".activity.Loginactivity"
+    android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.ForgetActivity"
+            android:screenOrientation="portrait"></activity>
 
-        <activity android:name=".activity.ZXingActivity"></activity>
+        <activity android:name=".activity.ZXingActivity"
+            android:screenOrientation="portrait"></activity>
+
+        <activity android:name=".activity.HomeDetailActivity"
+            android:screenOrientation="portrait"
+            ></activity>
+
     </application>
 
 
