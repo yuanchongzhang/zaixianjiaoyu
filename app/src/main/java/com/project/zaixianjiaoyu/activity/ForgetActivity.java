@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.project.zaixianjiaoyu.R;
+import com.project.zaixianjiaoyu.statusbar.ImmersionBar;
 import com.project.zaixianjiaoyu.util.Regular;
 import com.project.zaixianjiaoyu.util.TimeCount;
 import com.project.zaixianjiaoyu.util.ToastUtil;
@@ -50,6 +51,9 @@ public class ForgetActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forget);
         ButterKnife.bind(this);
+        ImmersionBar.with(this)
+                .statusBarDarkFont(true, 1f)
+                .init();
         timeCount = new TimeCount(60000, 100, btnSendMes);
     editUserphone.addTextChangedListener(new TextWatcher() {
         @Override

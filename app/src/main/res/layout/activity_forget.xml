@@ -6,12 +6,14 @@
     android:fitsSystemWindows="true"
     android:background="#EFEFF4"
     >
+
+   <!-- -->
     <RelativeLayout
         android:id="@+id/rl_top_layout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_50"
 
-        android:background="#20A8FF">
+        android:background="@color/white">
 
         <RelativeLayout
             android:id="@+id/rl_back"
@@ -34,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:textColor="@color/white"
+            android:textColor="#333333"
             android:text="忘记密码"
             android:textSize="@dimen/sp_16" />
     </RelativeLayout>
