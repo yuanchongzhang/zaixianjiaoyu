@@ -11,6 +11,8 @@ import android.widget.TextView;
 import com.project.zaixianjiaoyu.R;
 import com.project.zaixianjiaoyu.model.ShangPin;
 import com.bumptech.glide.Glide;
+import com.project.zaixianjiaoyu.refreshview.callback.IFooterCallBack;
+import com.project.zaixianjiaoyu.refreshview.utils.Utils;
 
 
 import java.util.ArrayList;
@@ -136,6 +138,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             text_right = (TextView) view.findViewById(R.id.text_right);
         }
     }
+
+
+
 }
 
 
