@@ -78,32 +78,73 @@ android:layout_centerVertical="true"
      android:layout_width="match_parent"
      android:layout_height="@dimen/dp_1"
      android:background="#E5E5E5" />
- <com.project.zaixianjiaoyu.banner.Banner
-     android:id="@+id/banner"
+
+ <com.project.zaixianjiaoyu.refreshview.XRefreshView
+     android:id="@+id/xrefreshview"
      android:layout_width="match_parent"
-     android:layout_height="@dimen/dp_180"
-     app:indicator_drawable_selected="@drawable/bannselected"
-     app:indicator_drawable_unselected="@drawable/bannerunselected"
-     />
+     android:layout_height="match_parent"
+     android:background="#fff">
+  <com.project.zaixianjiaoyu.refreshview.XScrollView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
 
- <!--    SimpleMarqueeView
-  android:inAnimation="@anim/in_right"
-     android:outAnimation="@anim/out_left"
- -->
- <com.project.zaixianjiaoyu.paomadeng.SimpleMarqueeView
-     android:id="@+id/simpleMarqueeView"
-     android:layout_width="match_parent"
-     android:layout_height="@dimen/dp_30"
+      >
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="vertical"
+       >
 
-android:background="@color/gray"
-     android:flipInterval="1500"
 
-     app:marqueeAnimDuration="1000"
+    <com.project.zaixianjiaoyu.banner.Banner
+        android:id="@+id/banner"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_180"
+        app:indicator_drawable_selected="@drawable/bannselected"
+        app:indicator_drawable_unselected="@drawable/bannerunselected"
+        />
 
-     app:smvTextColor="@color/black"
-     app:smvTextEllipsize="end"
-     android:paddingLeft="@dimen/dp_15"
-     app:smvTextGravity="center_vertical"
-     app:smvTextSingleLine="true"
-     app:smvTextSize="15sp" />
+    <!--    SimpleMarqueeView
+     android:inAnimation="@anim/in_right"
+        android:outAnimation="@anim/out_left"
+    -->
+    <com.project.zaixianjiaoyu.paomadeng.SimpleMarqueeView
+        android:id="@+id/simpleMarqueeView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_30"
+
+        android:background="@color/gray"
+        android:flipInterval="1500"
+
+        app:marqueeAnimDuration="1000"
+
+        app:smvTextColor="@color/black"
+        app:smvTextEllipsize="end"
+        android:paddingLeft="@dimen/dp_15"
+        app:smvTextGravity="center_vertical"
+        app:smvTextSingleLine="true"
+        app:smvTextSize="15sp" />
+
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view_test_rv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="2dp"
+
+        android:scrollbars="vertical" />
+
+   </LinearLayout>
+
+  </com.project.zaixianjiaoyu.refreshview.XScrollView>
+
+
+ </com.project.zaixianjiaoyu.refreshview.XRefreshView>
+
+
+
+
+
+
 </LinearLayout>

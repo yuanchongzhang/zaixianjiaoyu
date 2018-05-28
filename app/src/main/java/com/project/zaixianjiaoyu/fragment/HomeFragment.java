@@ -2,30 +2,41 @@ package com.project.zaixianjiaoyu.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.project.zaixianjiaoyu.R;
+import com.project.zaixianjiaoyu.activity.HomeDetailActivity;
+import com.project.zaixianjiaoyu.activity.WebViewActivity;
 import com.project.zaixianjiaoyu.activity.ZXingActivity;
+import com.project.zaixianjiaoyu.adapter.Person;
+import com.project.zaixianjiaoyu.adapter.SimpleAdapter;
 import com.project.zaixianjiaoyu.banner.Banner;
 import com.project.zaixianjiaoyu.banner.listener.OnBannerListener;
 import com.project.zaixianjiaoyu.imageloader.GlideImageLoader;
 import com.project.zaixianjiaoyu.paomadeng.OnItemClickListener;
 import com.project.zaixianjiaoyu.paomadeng.SimpleMF;
 import com.project.zaixianjiaoyu.paomadeng.SimpleMarqueeView;
+import com.project.zaixianjiaoyu.refreshview.XRefreshView;
+import com.project.zaixianjiaoyu.refreshview.XRefreshViewFooter;
 import com.project.zaixianjiaoyu.statusbar.ImmersionBar;
 import com.project.zaixianjiaoyu.util.ToastUtil;
 import com.project.zaixianjiaoyu.zxing.activity.CodeUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -61,16 +72,36 @@ public class HomeFragment extends Fragment implements OnBannerListener {
 
     public List<String> images = new ArrayList<>();
     List<String> datas = new ArrayList<>();
+    XRefreshView xRefreshView;
 
+    RecyclerView recyclerView;
+
+    SimpleAdapter adapter;
+    List<Person> personList = new ArrayList<Person>();
+    LinearLayoutManager layoutManager;
+    private boolean isBottom = false;
+    private int mLoadCount = 0;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+
         ImmersionBar.with(getActivity())
 
                 .statusBarDarkFont(true, 1f)
                 .init();
         unbinder = ButterKnife.bind(this, view);
-
+        xRefreshView= (XRefreshView) view.findViewById(R.id.xrefreshview);
+        initData();
+        recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view_test_rv);
+        recyclerView.setHasFixedSize(true);
+        xRefreshView.setPullLoadEnable(true);
+        adapter = new SimpleAdapter(personList, getActivity());
+        layoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setNestedScrollingEnabled(false);
+        // 静默加载模式不能设置footerview
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(layoutManager);
         images.add("http://ww4.sinaimg.cn/large/006uZZy8jw1faic1xjab4j30ci08cjrv.jpg");
         images.add("http://ww4.sinaimg.cn/large/006uZZy8jw1faic21363tj30ci08ct96.jpg");
         images.add("http://ww4.sinaimg.cn/large/006uZZy8jw1faic259ohaj30ci08c74r.jpg");
@@ -93,16 +124,75 @@ public class HomeFragment extends Fragment implements OnBannerListener {
             @Override
             public void onItemClickListener(TextView mView, String mData, int mPosition) {
                 ToastUtil.showCenterToast(getActivity(), mPosition + "");
+                startActivity(new Intent(getActivity(),HomeDetailActivity.class));
+
+
             }
         });
 
+        adapter.setCustomLoadMoreView(new XRefreshViewFooter(getActivity()));
+        xRefreshView.setPinnedTime(1000);
+        xRefreshView.setMoveForHorizontal(true);
+        xRefreshView.setXRefreshViewListener(new XRefreshView.SimpleXRefreshListener() {
+
+            @Override
+            public void onRefresh(boolean isPullDown) {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        xRefreshView.stopRefresh();
+                    }
+                }, 3000);
+            }
+
+            @Override
+            public void onLoadMore(boolean isSilence) {
+                new Handler().postDelayed(new Runnable() {
+                    public void run() {
+                        if(xRefreshView.hasLoadCompleted()){
+                        }
+                        for (int i = 0; i < 6; i++) {
+                            adapter.insert(new Person("More ", "21"),
+                                    adapter.getAdapterItemCount());
+
+                        }
+                        mLoadCount++;
+                        if (mLoadCount >= 3) {
+                            xRefreshView.setLoadComplete(true);
+                        } else {
+                            // 刷新完成必须调用此方法停止加载
+                            xRefreshView.stopLoadMore(false);
+                        }
+                    }
+                }, 1000);
+            }
+
+
+        });
+
+        adapter.setOnItemClickListener(new SimpleAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Toast.makeText(getActivity(), position+"", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         return view;
 
 
     }
 
-
+    private boolean isLeft = true;
+    private int getType() {
+        isLeft = !isLeft;
+        return isLeft ? 0 : 1;
+    }
+    private void initData() {
+        for (int i = 0; i < 15; i++) {
+            Person person = new Person("2018年5月下半月培训计划" + i, "" + i);
+            personList.add(person);
+        }
+    }
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -111,7 +201,7 @@ public class HomeFragment extends Fragment implements OnBannerListener {
 
     @Override
     public void OnBannerClick(int position) {
-        Toast.makeText(getActivity(), "点击跳转" + position + "", Toast.LENGTH_SHORT).show();
+     startActivity(new Intent(getActivity(), WebViewActivity.class));
     }
 
     @OnClick({R.id.img_zxing, R.id.edit_search, R.id.img_search, R.id.lyaout_search, R.id.layout_searchweb})

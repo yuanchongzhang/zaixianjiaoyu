@@ -3,23 +3,27 @@
 
     android:id="@+id/card_view"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
+    android:layout_height="@dimen/dp_40"
     android:layout_gravity="center"
-
+android:orientation="vertical"
     >
 
     <LinearLayout
         android:id="@+id/recycler_view_test_item_person_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:orientation="vertical"
-        android:padding="15dp">
+ android:paddingLeft="@dimen/dp_20"
+        android:layout_gravity="center"
+        android:gravity="center"
+        >
 
         <TextView
             android:id="@+id/recycler_view_test_item_person_name_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:textSize="@dimen/sp_14"
             android:textColor="@color/black"
             android:text="daf"
             />
@@ -31,7 +35,13 @@
             android:paddingLeft="5dp"
             android:textColor="@color/black"
             android:text="adsf"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            android:visibility="gone"
+            />
     </LinearLayout>
-
+<View
+    android:layout_width="match_parent"
+    android:layout_height="1px"
+    android:background="#9B9B9B"
+    />
 </LinearLayout>

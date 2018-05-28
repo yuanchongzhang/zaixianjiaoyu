@@ -7,14 +7,18 @@ import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.JavascriptInterface;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.project.zaixianjiaoyu.R;
+import com.project.zaixianjiaoyu.statusbar.ImmersionBar;
+import com.tencent.smtt.export.external.interfaces.SslError;
 import com.tencent.smtt.export.external.interfaces.SslErrorHandler;
 import com.tencent.smtt.sdk.WebChromeClient;
 import com.tencent.smtt.sdk.WebSettings;
@@ -23,6 +27,7 @@ import com.tencent.smtt.sdk.WebViewClient;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 import static android.webkit.WebSettings.MIXED_CONTENT_COMPATIBILITY_MODE;
 
@@ -33,13 +38,11 @@ import static android.webkit.WebSettings.MIXED_CONTENT_COMPATIBILITY_MODE;
 public class WebViewActivity extends BaseActivity {
 
 
-
-
     @BindView(R.id.v4_webview)
     WebView v4Webview;
     WebChromeClient chromeClient = new WebChromeClient() {
         @Override
-        public void onProgressChanged(com.tencent.smtt.sdk.WebView webView, int i) {
+        public void onProgressChanged(WebView webView, int i) {
             Log.e("进度", i + "");
             if (i == 100) {
                 dismissLoading();
@@ -50,6 +53,14 @@ public class WebViewActivity extends BaseActivity {
     };
     private final String ACTION_NAME = "发送广播";
     String url;
+    @BindView(R.id.img_back)
+    ImageView imgBack;
+    @BindView(R.id.rl_back)
+    RelativeLayout rlBack;
+    @BindView(R.id.tv_title)
+    TextView tvTitle;
+    @BindView(R.id.rl_top_layout)
+    RelativeLayout rlTopLayout;
     private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -75,11 +86,15 @@ public class WebViewActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_webview);
         ButterKnife.bind(this);
+        ImmersionBar.with(this)
+                .statusBarDarkFont(true, 1f)
+                .init();
         initWebView();
         registerBoradcastReceiver();
 //        url = getIntent().getStringExtra("url");
 //        Log.d("myurl", url);
 //        Toast.makeText(this, "aaaa", Toast.LENGTH_SHORT).show();
+        tvTitle.setText("网页");
         v4Webview.loadUrl("https://www.baidu.com/?tn=57095150_6_oem_dg");
 
     }
@@ -107,7 +122,7 @@ public class WebViewActivity extends BaseActivity {
         String ua = v4Webview.getSettings().getUserAgentString();
         v4Webview.getSettings().setUserAgentString(
                 ua + "; " + "mingtang_android");
-        v4Webview.addJavascriptInterface(new WebViewActivity.JsInterfaces(this),
+        v4Webview.addJavascriptInterface(new JsInterfaces(this),
                 "AndroidWebView");
         v4Webview.getSettings().setBuiltInZoomControls(true);
         v4Webview.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
@@ -147,7 +162,7 @@ public class WebViewActivity extends BaseActivity {
 
             @Override
             public void onReceivedSslError(WebView arg0, SslErrorHandler arg1,
-                                           com.tencent.smtt.export.external.interfaces.SslError arg2) {
+                                           SslError arg2) {
                 // TODO Auto-generated method stub
 //				super.onReceivedSslError(arg0, arg1, arg2);
                 arg1.proceed();
@@ -155,6 +170,21 @@ public class WebViewActivity extends BaseActivity {
             }
 
         });
+    }
+
+    @OnClick({R.id.img_back, R.id.rl_back, R.id.tv_title, R.id.rl_top_layout})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.img_back:
+                finish();
+                break;
+            case R.id.rl_back:
+                break;
+            case R.id.tv_title:
+                break;
+            case R.id.rl_top_layout:
+                break;
+        }
     }
 
 
