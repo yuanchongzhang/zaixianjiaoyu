@@ -45,7 +45,7 @@ public class Loginactivity extends BaseActivity {
     @BindView(R.id.btn_login)
     Button btnLogin;
     @BindView(R.id.text_forget)
-    TextView textForget;
+    ImageView textForget;
     @BindView(R.id.linearlayout_forget)
     LinearLayout linearlayoutForget;
 

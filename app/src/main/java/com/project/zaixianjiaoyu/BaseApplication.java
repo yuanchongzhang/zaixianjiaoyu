@@ -2,6 +2,7 @@ package com.project.zaixianjiaoyu;
 
 import android.app.Application;
 import android.support.multidex.MultiDex;
+import android.util.DisplayMetrics;
 import android.util.Log;
 
 import com.project.zaixianjiaoyu.http.MyOkhttp;
@@ -10,6 +11,7 @@ import com.project.zaixianjiaoyu.http.cache.CacheMode;
 import com.project.zaixianjiaoyu.http.cookie.store.PersistentCookieStore;
 import com.project.zaixianjiaoyu.http.model.HttpHeaders;
 import com.project.zaixianjiaoyu.http.model.HttpParams;
+import com.project.zaixianjiaoyu.zxing.DisplayUtil;
 import com.tencent.smtt.sdk.QbSdk;
 import com.tencent.smtt.sdk.TbsListener;
 
@@ -47,7 +49,7 @@ public class BaseApplication extends Application {
 
         //必须调用初始化
         MyOkhttp.init(this);
-
+        initDisplayOpinion();
         //以下设置的所有参数是全局参数,同样的参数可以在请求的时候再设置一遍,那么对于该请求来讲,请求中的参数会覆盖全局参数
         //好处是全局参数统一,特定请求可以特别定制参数
         try {
@@ -138,7 +140,15 @@ public class BaseApplication extends Application {
             }
         });
     }
-
+    private void initDisplayOpinion() {
+        DisplayMetrics dm = getResources().getDisplayMetrics();
+        DisplayUtil.density = dm.density;
+        DisplayUtil.densityDPI = dm.densityDpi;
+        DisplayUtil.screenWidthPx = dm.widthPixels;
+        DisplayUtil.screenhightPx = dm.heightPixels;
+        DisplayUtil.screenWidthDip = DisplayUtil.px2dip(getApplicationContext(), dm.widthPixels);
+        DisplayUtil.screenHightDip = DisplayUtil.px2dip(getApplicationContext(), dm.heightPixels);
+    }
     /**
      * 这里只是我谁便写的认证规则，具体每个业务是否需要验证，以及验证规则是什么，请与服务端或者leader确定
      * 这里只是我谁便写的认证规则，具体每个业务是否需要验证，以及验证规则是什么，请与服务端或者leader确定

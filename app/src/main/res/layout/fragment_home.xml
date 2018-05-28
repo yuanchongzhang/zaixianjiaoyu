@@ -6,6 +6,78 @@
     android:fitsSystemWindows="true"
     android:background="@color/white"
     >
+
+ <RelativeLayout
+     android:layout_width="match_parent"
+     android:layout_height="@dimen/dp_50"
+     android:background="@color/white">
+
+
+  <ImageView
+      android:id="@+id/img_zxing"
+      android:layout_width="@dimen/dp_20"
+      android:layout_height="@dimen/dp_20"
+      android:layout_gravity="center"
+      android:src="@mipmap/erweima"
+android:layout_centerVertical="true"
+      android:layout_marginLeft="@dimen/dp_10"
+      />
+
+  <LinearLayout
+      android:id="@+id/layout_searchweb"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_marginBottom="@dimen/dp_8"
+      android:layout_marginLeft="@dimen/dp_10"
+      android:layout_marginRight="@dimen/dp_20"
+      android:layout_marginTop="@dimen/dp_8"
+
+      android:layout_toRightOf="@+id/img_zxing"
+      android:background="@mipmap/sousuobackground"
+      android:orientation="horizontal">
+
+
+   <EditText
+       android:id="@+id/edit_search"
+       android:layout_width="0dp"
+       android:layout_height="match_parent"
+       android:layout_marginLeft="@dimen/dp_10"
+       android:layout_weight="1"
+       android:background="@null"
+       android:hint="搜索你要的优惠"
+       android:paddingLeft="@dimen/dp_6"
+       android:singleLine="true"
+       android:imeOptions="actionSearch"
+       android:textSize="@dimen/sp_12" />
+
+   <LinearLayout
+       android:id="@+id/lyaout_search"
+       android:layout_width="@dimen/dp_40"
+       android:layout_height="match_parent"
+
+       android:gravity="center"
+
+       >
+
+    <ImageView
+        android:id="@+id/img_search"
+        android:layout_width="@dimen/dp_17"
+        android:layout_height="@dimen/dp_20"
+        android:layout_gravity="center_vertical"
+
+        android:layout_toRightOf="@+id/edit_search"
+        android:src="@mipmap/search_img" />
+   </LinearLayout>
+
+  </LinearLayout>
+
+
+ </RelativeLayout>
+
+ <View
+     android:layout_width="match_parent"
+     android:layout_height="@dimen/dp_1"
+     android:background="#E5E5E5" />
  <com.project.zaixianjiaoyu.banner.Banner
      android:id="@+id/banner"
      android:layout_width="match_parent"
@@ -14,20 +86,23 @@
      app:indicator_drawable_unselected="@drawable/bannerunselected"
      />
 
- <!--    SimpleMarqueeView-->
+ <!--    SimpleMarqueeView
+  android:inAnimation="@anim/in_right"
+     android:outAnimation="@anim/out_left"
+ -->
  <com.project.zaixianjiaoyu.paomadeng.SimpleMarqueeView
      android:id="@+id/simpleMarqueeView"
      android:layout_width="match_parent"
      android:layout_height="@dimen/dp_30"
 
 android:background="@color/gray"
-     android:flipInterval="2500"
-     android:inAnimation="@anim/in_right"
-     android:outAnimation="@anim/out_left"
-     app:marqueeAnimDuration="2000"
+     android:flipInterval="1500"
+
+     app:marqueeAnimDuration="1000"
+
      app:smvTextColor="@color/black"
      app:smvTextEllipsize="end"
-
+     android:paddingLeft="@dimen/dp_15"
      app:smvTextGravity="center_vertical"
      app:smvTextSingleLine="true"
      app:smvTextSize="15sp" />
