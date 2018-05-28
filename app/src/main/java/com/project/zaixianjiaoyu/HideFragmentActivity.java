@@ -110,7 +110,7 @@ public class HideFragmentActivity extends BaseActivity {
                     meFragment = new MeFragment();
                     ft.add(R.id.content, meFragment);
                 }
-                ivMe.setImageResource(R.drawable.bid05);
+                ivMe.setImageResource(R.drawable.person_selected);
                 // tvMe.setTextColor(UIUtils.getColor(R.color.home_back_selected));
                 ft.show(meFragment);
                 break;
@@ -131,7 +131,9 @@ public class HideFragmentActivity extends BaseActivity {
                     moreFragment2 = new DiSiFragment();
                     ft.add(R.id.content, moreFragment2);
                 }
-                ivMore.setImageResource(R.drawable.bid07);
+//                ivMore.setImageResource(R.drawable.bid07);
+                ivFourth.setImageResource(R.drawable.bid05);
+
                 //  tvMore.setTextColor(UIUtils.getColor(R.color.home_back_selected));
                 ft.show(moreFragment2);
                 break;
@@ -143,9 +145,9 @@ public class HideFragmentActivity extends BaseActivity {
     private void reSetTab() {
         ivHome.setImageResource(R.drawable.bid02);
         ivTouzi.setImageResource(R.drawable.bid04);
-        ivMe.setImageResource(R.drawable.bid06);
+        ivMe.setImageResource(R.drawable.person_unselected);
         ivMore.setImageResource(R.drawable.bid08);
-
+        ivFourth.setImageResource(R.drawable.bid06);
     }
 
 

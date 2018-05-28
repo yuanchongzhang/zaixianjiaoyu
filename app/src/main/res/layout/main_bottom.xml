@@ -60,7 +60,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:text="我要投资"
+                android:text="安全教育"
                 android:textColor="@color/home_back_unselected"
                 android:textSize="14sp"/>
 
@@ -87,7 +87,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:text="更多"
+                android:text="发现"
                 android:textColor="@color/home_back_unselected"
                 android:textSize="14sp"/>
         </LinearLayout>
@@ -110,7 +110,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:text="我的资产"
+                android:text="消息"
                 android:textColor="@color/home_back_unselected"
                 android:textSize="14sp"/>
 
@@ -127,14 +127,14 @@
                 android:id="@+id/iv_me"
                 android:layout_width="22dp"
                 android:layout_height="22dp"
-                android:src="@drawable/bid06"/>
+                android:src="@drawable/person_unselected"/>
 
             <TextView
                 android:id="@+id/tv_me"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:text="我的资产"
+                android:text="我的"
                 android:textColor="@color/home_back_unselected"
                 android:textSize="14sp"/>
 
