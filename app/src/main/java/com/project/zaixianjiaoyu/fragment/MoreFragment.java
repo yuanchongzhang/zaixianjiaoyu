@@ -26,6 +26,7 @@ import com.project.zaixianjiaoyu.http.request.BaseRequest;
 import com.project.zaixianjiaoyu.layoutmanager.FullyGridLayoutManager;
 import com.project.zaixianjiaoyu.model.ShangPin;
 import com.project.zaixianjiaoyu.refreshview.XRefreshView;
+import com.project.zaixianjiaoyu.statusbar.ImmersionBar;
 import com.project.zaixianjiaoyu.view.CustomerFooter;
 
 import java.util.ArrayList;
@@ -40,7 +41,7 @@ import okhttp3.Response;
 /**
  * Created by Administrator on 2015/12/11.
  */
-public class MoreFragment extends Fragment {
+public class MoreFragment extends BaseFragment {
 
     Unbinder unbinder;
     @BindView(R.id.recycler_view_test_rv)
@@ -51,12 +52,13 @@ public class MoreFragment extends Fragment {
     private int totalpage = 0;
 
     List<ShangPin.DataBean> contentBean3 = new ArrayList<>();
-MyAdapter myAdapter;
+    MyAdapter myAdapter;
 
     private int mLoadCount = 0;
 
 
     private boolean isList = true;//false 为grid布局
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -64,7 +66,10 @@ MyAdapter myAdapter;
         View view = inflater.inflate(R.layout.fragment_fourth, null);
 
         unbinder = ButterKnife.bind(this, view);
-        xrefreshview= (XRefreshView) view.findViewById(R.id.xrefreshview);
+        ImmersionBar.setFitsSystemWindows(getActivity());
+
+        xrefreshview = (XRefreshView) view.findViewById(R.id.xrefreshview);
+
         xrefreshview.setPullLoadEnable(true);
         xrefreshview.setPinnedTime(1000);
         xrefreshview.setMoveForHorizontal(true);
@@ -76,7 +81,7 @@ MyAdapter myAdapter;
         xrefreshview.enableRecyclerViewPullUp(true);
         xrefreshview.enablePullUpWhenLoadCompleted(true);
         recyclerViewTestRv.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-        myAdapter=new MyAdapter(getActivity(),contentBean3);
+        myAdapter = new MyAdapter(getActivity(), contentBean3);
         recyclerViewTestRv.setAdapter(myAdapter);
         xrefreshview.setCustomFooterView(new CustomerFooter(getActivity()));
         getShop();
@@ -151,7 +156,7 @@ MyAdapter myAdapter;
 //                                                    recyclerViewTestRv.scrollToPosition(contentBean3.size()+2);
 // recyclerViewTestRv.smoothScrollToPosition(2);        height
 
-                                                    recyclerViewTestRv.smoothScrollBy(0,0);
+                                                    recyclerViewTestRv.smoothScrollBy(0, 300);
 //         smoothScrollToPositionFromTop
 //recyclerViewTestRv.notifyAll();
 //                                                    myAdapter.notifyDataSetChanged();
@@ -209,7 +214,7 @@ MyAdapter myAdapter;
                     public void onBefore(BaseRequest request) {
                         super.onBefore(request);
 //                        showLoading();
-
+showLoading();
                     }
 
                     @Override
@@ -230,13 +235,13 @@ MyAdapter myAdapter;
                     @Override
                     public void onError(Call call, Response response, Exception e) {
                         super.onError(call, response, e);
-//                        dismissLoading();
+                        dismissLoading();
                     }
 
                     @Override
                     public void onAfter(String s, Exception e) {
                         super.onAfter(s, e);
-//                        dismissLoading();
+                        dismissLoading();
                     }
                 });
 
