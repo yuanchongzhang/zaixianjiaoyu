@@ -91,8 +91,8 @@ public class TestInterfaceGetActivity extends BaseActivity {
                         AccessToken accessToken = new AccessToken();
                         Gson gson = new Gson();
                         accessToken = gson.fromJson(s, AccessToken.class);
-                        token = accessToken.getAccess_token();
-                        Toast.makeText(TestInterfaceGetActivity.this, "成功" + accessToken.getStatus(), Toast.LENGTH_SHORT).show();
+//                        token = accessToken.getAccess_token();
+//                        Toast.makeText(TestInterfaceGetActivity.this, "成功" + accessToken.getStatus(), Toast.LENGTH_SHORT).show();
                         getZhaiqistData(token);
                     }
 

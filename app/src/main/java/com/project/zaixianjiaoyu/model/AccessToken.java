@@ -1,32 +1,37 @@
+/*
+ * Copyright (C) 2017 Baidu, Inc. All Rights Reserved.
+ */
 package com.project.zaixianjiaoyu.model;
 
-/**
- * Created by Administrator on 2017/1/12.
- */
 public class AccessToken {
 
+    private String accessToken;
 
-    /**
-     * status : 1
-     * access_token : e2664d4bd3d2854d157832af601ea489
-     */
+    private int expiresIn;
 
-    private String status;
-    private String access_token;
+    private String json;
 
-    public String getStatus() {
-        return status;
+    public String getAccessToken() {
+        return accessToken;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
     }
 
-    public String getAccess_token() {
-        return access_token;
+    public int getExpiresIn() {
+        return expiresIn;
     }
 
-    public void setAccess_token(String access_token) {
-        this.access_token = access_token;
+    public void setExpiresIn(int expiresIn) {
+        this.expiresIn = expiresIn;
+    }
+
+    public String getJson() {
+        return json;
+    }
+
+    public void setJson(String json) {
+        this.json = json;
     }
 }

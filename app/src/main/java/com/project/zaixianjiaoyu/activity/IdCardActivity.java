@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2017 Baidu, Inc. All Rights Reserved.
- *//*
+ */
 
 package com.project.zaixianjiaoyu.activity;
 
@@ -20,9 +20,17 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
+import com.baidu.ocr.sdk.OCR;
+import com.baidu.ocr.sdk.OnResultListener;
+import com.baidu.ocr.sdk.exception.OCRError;
+import com.baidu.ocr.sdk.model.AccessToken;
+import com.baidu.ocr.sdk.model.IDCardParams;
+import com.baidu.ocr.sdk.model.IDCardResult;
+import com.baidu.ocr.sdk.model.Word;
+import com.baidu.ocr.ui.camera.CameraActivity;
 import com.project.zaixianjiaoyu.R;
-import com.project.zaixianjiaoyu.model.AccessToken;
+import com.project.zaixianjiaoyu.util.FileUtil;
+
 
 import java.io.File;
 
@@ -161,19 +169,18 @@ public class IdCardActivity extends AppCompatActivity implements View.OnClickLis
         // TODO 身份证号码合法校验，长度，字母数字
 
         // 调转到活体识别界面
-        Intent faceIntent = new Intent(IdCardActivity.this, FaceOnlineVerifyActivity.class);
+       Intent faceIntent = new Intent(IdCardActivity.this, FaceOnlineVerifyActivity.class);
         faceIntent.putExtra("username", username);
         faceIntent.putExtra("idnumber", idnumber);
         startActivity(faceIntent);
     }
 
-    */
 /**
      * 识别身份证
      *
      * @param idCardSide
      * @param filePath
-     *//*
+     */
 
     private void recIDCard(String idCardSide, String filePath) {
         displayTip("识别中...");
@@ -258,4 +265,4 @@ public class IdCardActivity extends AppCompatActivity implements View.OnClickLis
         });
     }
 }
-*/
+
