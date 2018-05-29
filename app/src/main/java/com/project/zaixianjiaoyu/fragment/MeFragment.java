@@ -2,6 +2,8 @@ package com.project.zaixianjiaoyu.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -23,10 +25,12 @@ import android.widget.Toast;
 import com.alipay.sdk.app.AuthTask;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.project.zaixianjiaoyu.BuildConfig;
 import com.project.zaixianjiaoyu.R;
 import com.project.zaixianjiaoyu.activity.AliWxPayActivity;
 import com.project.zaixianjiaoyu.activity.FeedBackActivity;
 import com.project.zaixianjiaoyu.activity.HistoryActivity;
+import com.project.zaixianjiaoyu.activity.ShibieActivity;
 import com.project.zaixianjiaoyu.alipay.AuthResult;
 import com.project.zaixianjiaoyu.alipay.OrderInfoUtil2_0;
 import com.project.zaixianjiaoyu.alipay.PayResult;
@@ -41,6 +45,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -163,6 +169,10 @@ public class MeFragment extends BaseFragment {
                 .crossFade()
                 .transform(new GlideCircleTransform(getActivity()))
                 .into(imgPerson);
+
+
+
+
         return view;
     }
 
@@ -258,7 +268,9 @@ public class MeFragment extends BaseFragment {
 
                 break;
             case R.id.text_settings:
-                Toast.makeText(getActivity(), "设置", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), "设置", Toast.LENGTH_SHORT).show();
+               startActivity(new Intent(getActivity(),ShibieActivity.class));
+
                 break;
         }
     }

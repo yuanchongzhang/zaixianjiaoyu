@@ -1,13 +1,20 @@
 package com.project.zaixianjiaoyu.activity;
 
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 
+import com.project.zaixianjiaoyu.BuildConfig;
 import com.project.zaixianjiaoyu.HideFragmentActivity;
 import com.project.zaixianjiaoyu.MainActivity;
 import com.project.zaixianjiaoyu.R;
 import com.project.zaixianjiaoyu.util.SharePreferenceUtil;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 
 /**
@@ -33,6 +40,17 @@ public class SplashActivity extends BaseActivity {
         setContentView(R.layout.activity_welcome);
         // ButterKnife.bind(this);
 
+
+        try {
+            PackageInfo packageInfo = getPackageManager().getPackageInfo(BuildConfig.APPLICATION_ID, PackageManager.GET_SIGNATURES);
+            String signValidString = getSignValidString(packageInfo.signatures[0].toByteArray());
+            Log.e("获取应用签名", BuildConfig.APPLICATION_ID + "__" + signValidString);
+        } catch (Exception e) {
+            Log.e("获取应用签名", "异常__" + e);
+        }
+
+
+
         new Handler().postDelayed(new Runnable() {
 
             @Override
@@ -56,4 +74,26 @@ public class SplashActivity extends BaseActivity {
 
     }
 
+    private String getSignValidString( byte[] paramArrayOfByte) throws NoSuchAlgorithmException
+    {
+        MessageDigest localMessageDigest = MessageDigest.getInstance("MD5");
+        localMessageDigest.update(paramArrayOfByte);
+        return toHexString(localMessageDigest.digest());
+    }
+    public String toHexString(byte[] paramArrayOfByte) {
+        if (paramArrayOfByte == null) {
+            return null;
+        }
+        StringBuilder localStringBuilder = new StringBuilder(2 * paramArrayOfByte.length);
+        for (int i = 0; ; i++) {
+            if (i >= paramArrayOfByte.length) {
+                return localStringBuilder.toString();
+            }
+            String str = Integer.toString(0xFF & paramArrayOfByte[i], 16);
+            if (str.length() == 1) {
+                str = "0" + str;
+            }
+            localStringBuilder.append(str);
+        }
+    }
 }
