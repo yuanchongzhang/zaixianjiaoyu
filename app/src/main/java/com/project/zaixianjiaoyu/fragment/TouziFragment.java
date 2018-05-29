@@ -67,7 +67,7 @@ public class TouziFragment extends BaseFragment {
          /* .placeholder(R.color.abc_tab_text_normal)
                 .error(R.color.abc_tab_text_normal)*/
         Glide.with(getActivity())
-                .load("http://img.zcool.cn/community/0142135541fe180000019ae9b8cf86.jpg@1280w_1l_2o_100sh.png")
+                .load("http://img.zcool.cn/community/010f87596f13e6a8012193a363df45.jpg@1280w_1l_2o_100sh.jpg")
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .crossFade()
                 .transform(new GlideCircleTransform(getActivity(), 20, getActivity().getResources().getColor(R.color.black)))

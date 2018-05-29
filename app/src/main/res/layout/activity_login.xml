@@ -8,7 +8,9 @@
  <View
      android:layout_width="match_parent"
      android:layout_height="@dimen/status_bar_height"
-     android:background="@color/status_bar" />
+     android:background="@color/status_bar"
+     android:visibility="gone"
+     />
 
  <include
      layout="@layout/v6login_title"

@@ -22,8 +22,7 @@ import butterknife.Unbinder;
  * Created by Administrator on 2015/12/11.
  */
 public class MeFragment extends Fragment {
-    @BindView(R.id.btn_login)
-    Button btnLogin;
+
     Unbinder unbinder;
 
     @Nullable
@@ -42,9 +41,5 @@ public class MeFragment extends Fragment {
         unbinder.unbind();
     }
 
-    @OnClick(R.id.btn_login)
-    public void onViewClicked() {
-        startActivity(new Intent(getActivity(),Loginactivity.class));
 
-    }
 }

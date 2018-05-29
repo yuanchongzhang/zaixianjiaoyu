@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.project.zaixianjiaoyu.R;
 import com.project.zaixianjiaoyu.model.ShangPin;
+import com.project.zaixianjiaoyu.util.GlideCircleTransform;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,13 +59,15 @@ public class XiaoXiAdapter extends RecyclerView.Adapter<XiaoXiAdapter.ViewHolder
     @Override
     public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
         viewHolder.text_zhi.setText(datas.get(position));
-
+        Glide.with(context).load("http://img.zcool.cn/community/010f87596f13e6a8012193a363df45.jpg@1280w_1l_2o_100sh.jpg").transform(new GlideCircleTransform(context)).error(R.mipmap.zhanwei).placeholder(R.mipmap.zhanwei).into(viewHolder.img_person);
   /*      viewHolder.text_new.setText("¥" + datas.get(position).getItemendprice());
         Glide.with(context).load(datas.get(position).getItempic()).error(R.mipmap.zhanwei).placeholder(R.mipmap.zhanwei).into(viewHolder.img_tupian);
         viewHolder.text_old.setText("¥" + datas.get(position).getItemprice());
         viewHolder.text_right.setText("¥" + datas.get(position).getRate());
         viewHolder.text_xiaoliang.setText("销量" + datas.get(position).getItemsale());
         viewHolder.text_quan.setText("领券减" + datas.get(position).getCouponmoney() + "元");*/
+
+
 
         if (mOnItemClickListener != null) {
             //为ItemView设置监听器
@@ -114,25 +117,15 @@ public class XiaoXiAdapter extends RecyclerView.Adapter<XiaoXiAdapter.ViewHolder
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView text_zhi;
 
-        public TextView text_new;
-        public ImageView img_tupian;
-        public TextView text_old;
-
-        public TextView text_right;
-        public TextView text_xiaoliang;
-        public TextView text_quan;
+ImageView img_person;
 
 
         public ViewHolder(View view) {
             super(view);
             text_zhi = (TextView) view.findViewById(R.id.text_zhi);
-            text_new = (TextView) view.findViewById(R.id.text_new);
-            img_tupian = (ImageView) view.findViewById(R.id.img_tupian);
-            text_old = (TextView) view.findViewById(R.id.text_old);
-            text_xiaoliang = (TextView) view.findViewById(R.id.text_xiaoliang);
-            text_quan = (TextView) view.findViewById(R.id.text_quan);
+            img_person= (ImageView) view.findViewById(R.id.img_person);
 
-            text_right = (TextView) view.findViewById(R.id.text_right);
+
         }
     }
 
