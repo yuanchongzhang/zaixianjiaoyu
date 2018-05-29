@@ -1,0 +1,114 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/lyaout_index"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/dp_5"
+    android:background="#F5F5F5"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/img_tupian"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_150"
+        android:layout_marginLeft="@dimen/dp_5"
+        android:scaleType="fitXY"
+        android:src="@mipmap/zhanwei"
+     />
+    <!-- android:src="@mipmap/ic_launcher"-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/text_zhi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dp_15"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLength="12"
+            android:singleLine="true"
+            android:text="爱上对方考虑是打开房间了"
+            android:textColor="#7B7B7B"
+            android:textSize="@dimen/sp_14" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_30"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/text_new"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:text="¥123"
+                android:textColor="#E81655"
+                android:textSize="@dimen/sp_14" />
+
+            <TextView
+                android:id="@+id/text_old"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_toRightOf="@+id/text_new"
+                android:text="¥150"
+                android:textSize="@dimen/sp_12"
+
+                />
+
+            <TextView
+                android:id="@+id/text_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dp_10"
+                android:textColor="#E81655"
+                android:text="¥150"
+                android:textSize="@dimen/sp_12" />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_30"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/text_xiaoliang"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:text="123"
+                android:textSize="@dimen/sp_14" />
+
+            <TextView
+                android:id="@+id/text_quan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dp_10"
+                android:textColor="#E81655"
+                android:text="¥150"
+                android:textSize="@dimen/sp_12" />
+
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

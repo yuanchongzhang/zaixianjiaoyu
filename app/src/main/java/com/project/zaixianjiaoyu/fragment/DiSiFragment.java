@@ -1,14 +1,28 @@
 package com.project.zaixianjiaoyu.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.project.zaixianjiaoyu.R;
+import com.project.zaixianjiaoyu.activity.HomeDetailActivity;
+import com.project.zaixianjiaoyu.adapter.Person;
+import com.project.zaixianjiaoyu.adapter.SimpleAdapter;
+import com.project.zaixianjiaoyu.adapter.XiaoXiAdapter;
+import com.project.zaixianjiaoyu.refreshview.XRefreshView;
+import com.project.zaixianjiaoyu.refreshview.XRefreshViewFooter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -21,13 +35,15 @@ import de.greenrobot.event.EventBus;
  */
 public class DiSiFragment extends Fragment {
 
-    @BindView(R.id.btn_shouye)
-    Button btnShouye;
-    @BindView(R.id.btn_second)
-    Button btnSecond;
-    @BindView(R.id.btn_third)
-    Button btnThird;
     Unbinder unbinder;
+    XRefreshView xRefreshView;
+
+    RecyclerView recyclerView;
+    List<Person> personList = new ArrayList<Person>();
+    XiaoXiAdapter xiaoXiAdapter;
+    LinearLayoutManager layoutManager;
+    private int mLoadCount = 0;
+    List<String> datas=new ArrayList<>();
 
     @Nullable
     @Override
@@ -36,6 +52,58 @@ public class DiSiFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_fourth2, null);
 
         unbinder = ButterKnife.bind(this, view);
+        xRefreshView = (XRefreshView) view.findViewById(R.id.xrefreshview);
+        initData();
+        recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view_test_rv);
+        recyclerView.setHasFixedSize(true);
+        xRefreshView.setPullLoadEnable(true);
+        for (int i = 0; i < 10; i++) {
+            datas.add("消息" + i);
+        }
+
+        xiaoXiAdapter =new XiaoXiAdapter(getActivity(), datas);
+
+//        adapter = new SimpleAdapter(personList, getActivity());
+        layoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setNestedScrollingEnabled(false);
+        // 静默加载模式不能设置footerview
+        recyclerView.setAdapter(xiaoXiAdapter);
+        recyclerView.setLayoutManager(layoutManager);
+
+//        adapter.setCustomLoadMoreView(new XRefreshViewFooter(getActivity()));
+        xRefreshView.setPinnedTime(1000);
+        xRefreshView.setMoveForHorizontal(true);
+        xRefreshView.setXRefreshViewListener(new XRefreshView.SimpleXRefreshListener() {
+
+            @Override
+            public void onRefresh(boolean isPullDown) {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        xRefreshView.stopRefresh();
+                    }
+                }, 3000);
+            }
+
+            @Override
+            public void onLoadMore(boolean isSilence) {
+                new Handler().postDelayed(new Runnable() {
+                    public void run() {
+
+                    }
+                }, 1000);
+            }
+
+
+        });
+
+        xiaoXiAdapter.setOnItemClickListener(new XiaoXiAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Toast.makeText(getActivity(), position+"", Toast.LENGTH_SHORT).show();
+            }
+        });
         return view;
     }
 
@@ -45,19 +113,10 @@ public class DiSiFragment extends Fragment {
         unbinder.unbind();
     }
 
-    @OnClick({R.id.btn_shouye, R.id.btn_second, R.id.btn_third})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.btn_shouye:
-                EventBus.getDefault().post(0);
-
-                break;
-            case R.id.btn_second:
-                EventBus.getDefault().post(1);
-                break;
-            case R.id.btn_third:
-                EventBus.getDefault().post(2);
-                break;
+    private void initData() {
+        for (int i = 0; i < 15; i++) {
+            Person person = new Person("2018年5月下半月培训计划" + i, "" + i);
+            personList.add(person);
         }
     }
 }

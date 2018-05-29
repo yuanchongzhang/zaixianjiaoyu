@@ -8,12 +8,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.project.zaixianjiaoyu.R;
 import com.project.zaixianjiaoyu.model.ShangPin;
-import com.bumptech.glide.Glide;
-import com.project.zaixianjiaoyu.refreshview.callback.IFooterCallBack;
-import com.project.zaixianjiaoyu.refreshview.utils.Utils;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +18,7 @@ import java.util.List;
 /**
  * Created by jianghejie on 15/11/26.
  */
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
+public class XiaoXiAdapter extends RecyclerView.Adapter<XiaoXiAdapter.ViewHolder> {
 
     public void setClickCallBack(ItemClickCallBack clickCallBack) {
         this.clickCallBack = clickCallBack;
@@ -31,12 +28,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         void onItemClick(int pos);
     }
 
-    public List<ShangPin.DataBean> datas = null;
+    public List<String> datas = null;
     private ItemClickCallBack clickCallBack;
 
     private Context context;
 
-    public MyAdapter(Context context, List<ShangPin.DataBean> datas) {
+    public XiaoXiAdapter(Context context, List<String> datas) {
         this.context = context;
         this.datas = datas;
     }
@@ -44,14 +41,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     //创建新View，被LayoutManager所调用
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_xiaoxi, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_index, viewGroup, false);
     /*    */
 
         return new ViewHolder(view);
     }
 
-    public void setData(List<ShangPin.DataBean> list) {
-        List<ShangPin.DataBean> list2 = new ArrayList<>();
+    public void setData(List<String> list) {
+        List<String> list2 = new ArrayList<>();
         datas.addAll(list);
 
         notifyDataSetChanged();
@@ -60,14 +57,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     //将数据与界面进行绑定的操作
     @Override
     public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
-        viewHolder.text_zhi.setText(datas.get(position).getItemtitle());
+        viewHolder.text_zhi.setText(datas.get(position));
 
-        viewHolder.text_new.setText("¥" + datas.get(position).getItemendprice());
+  /*      viewHolder.text_new.setText("¥" + datas.get(position).getItemendprice());
         Glide.with(context).load(datas.get(position).getItempic()).error(R.mipmap.zhanwei).placeholder(R.mipmap.zhanwei).into(viewHolder.img_tupian);
         viewHolder.text_old.setText("¥" + datas.get(position).getItemprice());
         viewHolder.text_right.setText("¥" + datas.get(position).getRate());
         viewHolder.text_xiaoliang.setText("销量" + datas.get(position).getItemsale());
-        viewHolder.text_quan.setText("领券减" + datas.get(position).getCouponmoney() + "元");
+        viewHolder.text_quan.setText("领券减" + datas.get(position).getCouponmoney() + "元");*/
 
         if (mOnItemClickListener != null) {
             //为ItemView设置监听器

@@ -5,20 +5,23 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/status_bar_height"
+        android:background="@color/white" />
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_50"
+        android:layout_height="@dimen/dp_40"
         android:background="@color/white">
 
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_centerInParent="true"
-    android:text="消息"
-    />
-
-
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="消息"
+            android:textColor="#333333"
+            android:textSize="@dimen/sp_14" />
 
 
     </RelativeLayout>
@@ -27,4 +30,23 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_1"
         android:background="#E5E5E5" />
+
+
+    <com.project.zaixianjiaoyu.refreshview.XRefreshView
+        android:id="@+id/xrefreshview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#fff">
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view_test_rv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="2dp"
+
+            android:scrollbars="vertical" />
+
+
+    </com.project.zaixianjiaoyu.refreshview.XRefreshView>
 </LinearLayout>
