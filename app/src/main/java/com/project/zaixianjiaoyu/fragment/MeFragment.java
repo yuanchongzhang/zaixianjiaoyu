@@ -21,12 +21,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alipay.sdk.app.AuthTask;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.project.zaixianjiaoyu.R;
 import com.project.zaixianjiaoyu.activity.AliWxPayActivity;
 import com.project.zaixianjiaoyu.activity.FeedBackActivity;
+import com.project.zaixianjiaoyu.activity.HistoryActivity;
 import com.project.zaixianjiaoyu.alipay.AuthResult;
 import com.project.zaixianjiaoyu.alipay.OrderInfoUtil2_0;
 import com.project.zaixianjiaoyu.alipay.PayResult;
+import com.project.zaixianjiaoyu.util.GlideCircleTransform;
 import com.tencent.smtt.export.external.interfaces.IX5WebViewBase;
 
 import org.json.JSONException;
@@ -153,6 +157,12 @@ public class MeFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_me, null);
 
         unbinder = ButterKnife.bind(this, view);
+        Glide.with(getActivity())
+                .load("http://img05.tooopen.com/images/20150820/tooopen_sy_139205349641.jpg")
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .crossFade()
+                .transform(new GlideCircleTransform(getActivity()))
+                .into(imgPerson);
         return view;
     }
 
@@ -238,7 +248,9 @@ public class MeFragment extends BaseFragment {
 
                 break;
             case R.id.text_history:
-                Toast.makeText(getActivity(), "历史", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), "历史", Toast.LENGTH_SHORT).show();
+               startActivity(new Intent(getActivity(),HistoryActivity.class));
+
                 break;
             case R.id.text_fankui:
 
