@@ -14,6 +14,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -101,6 +102,8 @@ public class IdCardActivity extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onError(OCRError error) {
                 // 调用失败，返回OCRError子类SDKError对象
+                Log.d(error.toString(),"3333333333333");
+
                 displayToastTip(error.getMessage());
             }
         }, getApplicationContext());

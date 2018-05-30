@@ -82,7 +82,8 @@ public class APIService {
         sb.append("&client_secret=").append(sk);
         sb.append("&grant_type=client_credentials");
         HttpUtil.getInstance().getAccessToken(listener, ACCESS_TOKEN_URL, sb.toString());
-
+//     ak   LnmD3jcsk3mCNX9TsFdxA4IB
+//        sk odrx16ez3QMe1OhNWsUlH4aQX7BxZNGI
     }
 
     /**

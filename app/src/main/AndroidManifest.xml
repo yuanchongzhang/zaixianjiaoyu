@@ -135,8 +135,13 @@
         <activity
             android:name=".activity.IdCardActivity"
             android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".activity.FaceOnlineVerifyActivity"
+            android:screenOrientation="portrait"></activity>
 
-
+        <activity
+            android:name=".activity.OfflineFaceLivenessActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 

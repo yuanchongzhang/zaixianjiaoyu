@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -161,6 +162,8 @@ public class FaceOnlineVerifyActivity extends AppCompatActivity implements View.
                 OnResultListener<LivenessVsIdcardResult>() {
             @Override
             public void onResult(LivenessVsIdcardResult result) {
+                Log.d(result.getFaceliveness()+"","333333");
+                Log.d(result.getScore()+"","333333");
                 delete();
                 if (result != null && result.getScore() > 0.8) {
                     displayTip(resultTipTV, "核身成功");
@@ -176,6 +179,9 @@ public class FaceOnlineVerifyActivity extends AppCompatActivity implements View.
 
             @Override
             public void onError(FaceException error) {
+
+                Log.d(error.getErrorMessage()+"","333333");
+
                 delete();
                 displayTip(resultTipTV, "核身失败：" + error.getErrorMessage());
                 // TODO 错误处理

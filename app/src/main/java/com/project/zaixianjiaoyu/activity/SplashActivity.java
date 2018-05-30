@@ -21,8 +21,8 @@ import java.security.NoSuchAlgorithmException;
  * Created by Administrator on 2016/11/15.
  */
 public class SplashActivity extends BaseActivity {
-
-
+//    a82483efc4a7a62caa74230a7aecd619
+//175507BFADAD16EF28FED47D0C5EEE64  A82483EFC4A7A62CAA74230A7AECD619
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
