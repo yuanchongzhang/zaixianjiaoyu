@@ -161,19 +161,19 @@ public class IdCardActivity extends AppCompatActivity implements View.OnClickLis
     // 身份证识别成功后跳转到人脸离线活体检测
     private void jumpToOnlineVerify() {
 
-        if (TextUtils.isEmpty(username)) {
+       /* if (TextUtils.isEmpty(username)) {
             Toast.makeText(IdCardActivity.this, "用户名不能为空", Toast.LENGTH_SHORT).show();
             return;
         }
         if (TextUtils.isEmpty(idnumber)) {
             Toast.makeText(IdCardActivity.this, "身份证不能为空", Toast.LENGTH_SHORT).show();
             return;
-        }
+        }*/
         // TODO 身份证号码合法校验，长度，字母数字
 
         // 调转到活体识别界面
        Intent faceIntent = new Intent(IdCardActivity.this, FaceOnlineVerifyActivity.class);
-        faceIntent.putExtra("username", username);
+       faceIntent.putExtra("username", username);
         faceIntent.putExtra("idnumber", idnumber);
         startActivity(faceIntent);
     }

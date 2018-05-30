@@ -30,6 +30,7 @@ public class APIService {
     private static final String ONLINE_LIVENESS_URL = "https://aip.baidubce.com/rest/2.0/face/v2/faceverify";
     // 公安接口
     private static final String LIVENESS_VS_IDCARD_URL = "https://aip.baidubce.com/rest/2.0/face/v2/person/verify";
+//    private static final String LIVENESS_VS_IDCARD_URL = "https://aip.baidubce.com/rest/2.0/face/v3/person/verify";
 
     private String accessToken;
 
