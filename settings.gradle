@@ -1,2 +1,3 @@
 include ':app', ':ocr_ui', ':faceplatform-ui'
 include ':faceplatform-release'
+include ':jiaozivideoplayer'

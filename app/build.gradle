@@ -79,4 +79,5 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.4.0'
     compile project(':faceplatform-ui')
     compile project(':ocr_ui')
+    compile project(':jiaozivideoplayer')
 }

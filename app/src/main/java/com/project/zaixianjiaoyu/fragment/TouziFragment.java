@@ -1,5 +1,6 @@
 package com.project.zaixianjiaoyu.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.project.zaixianjiaoyu.R;
+import com.project.zaixianjiaoyu.activity.ShipinActivity;
 import com.project.zaixianjiaoyu.util.GlideCircleTransform;
 
 import butterknife.BindView;
@@ -111,8 +113,8 @@ public class TouziFragment extends BaseFragment {
             case R.id.text_oed:
 
             case R.id.layout_34:
-                Toast.makeText(getActivity(), "跳转到视频页面", Toast.LENGTH_SHORT).show();
-
+//                Toast.makeText(getActivity(), "跳转到视频页面", Toast.LENGTH_SHORT).show();
+startActivity(new Intent(getActivity(),ShipinActivity.class));
 
                 break;
         }
