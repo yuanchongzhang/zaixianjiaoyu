@@ -5,6 +5,7 @@ import android.support.multidex.MultiDex;
 import android.util.DisplayMetrics;
 import android.util.Log;
 
+import com.baidu.idl.face.platform.LivenessTypeEnum;
 import com.project.zaixianjiaoyu.http.MyOkhttp;
 import com.project.zaixianjiaoyu.http.cache.CacheEntity;
 import com.project.zaixianjiaoyu.http.cache.CacheMode;
@@ -17,6 +18,8 @@ import com.tencent.smtt.sdk.TbsListener;
 
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 
 import javax.net.ssl.HostnameVerifier;
@@ -33,7 +36,8 @@ import javax.net.ssl.X509TrustManager;
  * ================================================
  */
 public class BaseApplication extends Application {
-
+    public static List<LivenessTypeEnum> livenessList = new ArrayList<LivenessTypeEnum>();
+    public static boolean isLivenessRandom = false;
     @Override
     public void onCreate() {
         super.onCreate();
