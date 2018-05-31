@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_160"
         android:background="#00DAF6">
-
+      <!--  android:alpha="0.9"-->
         <ImageView
             android:id="@+id/img_person"
             android:layout_width="@dimen/dp_45"
@@ -23,7 +23,7 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="@dimen/dp_40"
-            android:alpha="0.6"
+
             android:src="@mipmap/ic_launcher" />
 
         <TextView
