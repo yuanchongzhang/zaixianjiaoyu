@@ -20,6 +20,7 @@ import com.project.zaixianjiaoyu.adapter.SimpleAdapter;
 import com.project.zaixianjiaoyu.adapter.XiaoXiAdapter;
 import com.project.zaixianjiaoyu.refreshview.XRefreshView;
 import com.project.zaixianjiaoyu.refreshview.XRefreshViewFooter;
+import com.project.zaixianjiaoyu.statusbar.ImmersionBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -118,5 +119,13 @@ public class DiSiFragment extends Fragment {
             Person person = new Person("2018年5月下半月培训计划" + i, "" + i);
             personList.add(person);
         }
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        ImmersionBar.with(getActivity())
+
+                .statusBarDarkFont(true, 1f)
+                .init();
     }
 }

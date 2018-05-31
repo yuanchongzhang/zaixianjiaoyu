@@ -1,16 +1,22 @@
 package com.project.zaixianjiaoyu.fragment;
 
+import android.Manifest;
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -30,11 +36,16 @@ import com.project.zaixianjiaoyu.R;
 import com.project.zaixianjiaoyu.activity.AliWxPayActivity;
 import com.project.zaixianjiaoyu.activity.FeedBackActivity;
 import com.project.zaixianjiaoyu.activity.HistoryActivity;
+import com.project.zaixianjiaoyu.activity.Loginactivity;
+import com.project.zaixianjiaoyu.activity.SelectPicActivity;
 import com.project.zaixianjiaoyu.activity.ShibieActivity;
 import com.project.zaixianjiaoyu.alipay.AuthResult;
 import com.project.zaixianjiaoyu.alipay.OrderInfoUtil2_0;
 import com.project.zaixianjiaoyu.alipay.PayResult;
+
+import com.project.zaixianjiaoyu.statusbar.ImmersionBar;
 import com.project.zaixianjiaoyu.util.GlideCircleTransform;
+import com.project.zaixianjiaoyu.util.ToastUtil;
 import com.tencent.smtt.export.external.interfaces.IX5WebViewBase;
 
 import org.json.JSONException;
@@ -59,6 +70,7 @@ import me.nereo.multi_image_selector.MultiImageSelector;
 import me.nereo.multi_image_selector.MultiImageSelectorActivity;
 
 import static android.app.Activity.RESULT_OK;
+import static com.project.zaixianjiaoyu.activity.IdCardActivity.REQUEST_CODE_CAMERA;
 
 
 /**
@@ -88,7 +100,7 @@ public class MeFragment extends BaseFragment {
     private static final int REQUEST_IMAGE = 2;
     protected static final int REQUEST_STORAGE_READ_ACCESS_PERMISSION = 101;
     protected static final int REQUEST_STORAGE_WRITE_ACCESS_PERMISSION = 102;
-
+    private static final int REQUEST_CODE_SHARE = 11006;//分享
     private TextView mResultText;
     private RadioGroup mChoiceMode, mShowCamera;
     private EditText mRequestNum;
@@ -100,7 +112,8 @@ public class MeFragment extends BaseFragment {
 
     public static final String RSA_PRIVATE = "MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDklPqDHUU0efceV10d6FTlPa7OuBBdN6GD9MAYoNSfD6f3lb2rdLL7FTM6zR+99fMtGJ2CbhuhQqDxHyVEdTBcI4s+wFGwELnsQSf/pjlgKr1BtF2f5utbELpBnZ1Q+AgYR3OpMye08aDA9qjANKWFaOu79lBEnonHZMFmxgQV1Kekvp2HhakkhwHX+g5nqwHaR/P4a9xrxa6Xw/iES3kFBH2cxqo7O5zt9d4ZXHHMkfhDE/DFk954o+CnmaGQaXVoFkuWtAAJ+o//ncwQ+gmOoXHPd4ojB6Oy23xT7ffjUhWAibuIdnWY9sG0xllo2lEqBIflLU/bzl8of1u5ywMfAgMBAAECggEAGXRFmUgvJrLWQ/iyk9wFaCnAR6DToa3KPKmKorN2OehCah2wq2EpdTBdLhUdjcfPtpvhHl8okIKc7XzsZ30tT3Vd0jUUY6jZK2fuDlfyV7UqsiBltKLAXrm0JA5rMFMOg7WhOZxKtamanyJYlF7Id9zBM4MwWRPWf+/GYa13Uv7PZzL8iE9xbllTqw8rKMViCsZztDx2FcckZIt8ZQD989l5Du6+3U5M35lWPMQ41wRBcrnms+kql4oBoGusUA0EjwDkGlikB+STwTPCDjtSUyl9QmILGT0V0zytOLSQING2jxaRdMivX0KOWihMuTF6qHQxgJ0a/q1PGpgeHsSCEQKBgQD8mBIvSbh0YuMntE8rmtYAxz39PUcxewCmq3g/jQp4iHO5B+0dkrZMfDqgqx8H5wTig4BbrZTH3SoU/KLppC/1kPcV0XvWBnHO3lI3VwLO4SWDQkZzVT0FhktHqWiBVaJOl8TXdVyQkPSoEKg3h5+1OZGJL/IP8A8Sf6xYqQKrpQKBgQDnqgUwCZsxm07kcFGju1gY/fmHyjiUsU4uK0zh2Yd5r96t+heTHGDBrg7xKs29IO9bhPLf4wh4uypWffKxnk32ryb1ZMx2C17QOKyiDnSmI9gaMXOvfSzwhrJJGm2UrBHgju37vW960RQS4Y06l7K4xpsyLJ2xTQsTalem/VPIcwKBgQDll5AH3XlEiNGyOCkyGEXmZTOKKBW6+vOnivn8wcU/s7+D8plrJPyAXvanLYNCGpENFrwoGInAdN2YP94QgkV5bq+37DYkXq05fEi8tmD+DBWdzjLdCCA0ElIArBIqZNznlPm9YZambKuEy8cq2iKnhdEsIiFirS/1/4h2+gBMZQKBgCPzFF8B/p1SFooIjAK2fdNTBjf2P5WDdjhf68xYb1eI3StuVd40Vyd3FUaDd+3TgJFZLj9kAdqKYOWPIexCPqL7RzZpb/kZhpsVUGTNjXiCs3RNHECtUh35KQ2DFmIt2ZBZXcDlArmyXEUZz0q6Y7ecylSc69OpuwBGTlfRlADVAoGBAKM3d+iZ3464t1cGuVUc5nB5ISKr6+UtOkEXHNurFpCDMQQHafyCCkptSqz/BSBb4w/vbthKOf22R5aikBFBsLGQVPHN+YgCnYZmOUZc19FyvaqOAcOlCUKeKbu6fZFagAcR+avSYHMS3DtesWa8Qbp2gT/hyNhAUk7lqhVJqpRF";
     private static final int SDK_PAY_FLAG = 1;
-
+    private static final int REQUEST_CODE_PHOTO = 11003;//获取照相权限
+    private final static int REQUEST_PHOTO = 400;
     private static final int SDK_AUTH_FLAG = 2;
     private Handler mHandler = new Handler() {
         @SuppressWarnings("unused")
@@ -175,7 +188,14 @@ public class MeFragment extends BaseFragment {
 
         return view;
     }
+    @Override
+    public void onResume() {
+        super.onResume();
+        ImmersionBar.with(getActivity())
 
+                .statusBarDarkFont(true, 1f)
+                .init();
+    }
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -193,10 +213,14 @@ public class MeFragment extends BaseFragment {
                 break;
             case R.id.text_qiandao:
                 Toast.makeText(getActivity(), "签到", Toast.LENGTH_SHORT).show();
+//                startActivity(new Intent(getActivity(), Loginactivity.class));
+
                 break;
             case R.id.text_touxiang:
-//                Toast.makeText(getActivity(), "头像设置", Toast.LENGTH_SHORT).show();
-                selectImage(REQUEST_IMAGE);
+//
+//                selectImage(REQUEST_PHOTO);
+//               startActivity(new Intent(getActivity(), SelectPicActivity.class));
+                pickImage();
                 break;
             case R.id.text_kaoshi:
                 Toast.makeText(getActivity(), "考试", Toast.LENGTH_SHORT).show();
@@ -284,8 +308,61 @@ public class MeFragment extends BaseFragment {
                 .start(getActivity(), result);
     }
 
+    private void pickImage() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN // Permission was added in API Level 16
+                && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            requestPermission(Manifest.permission.READ_EXTERNAL_STORAGE,
+                    getString(R.string.mis_permission_rationale),
+                    REQUEST_STORAGE_READ_ACCESS_PERMISSION);
+        }else {
+         /*   boolean showCamera = mShowCamera.getCheckedRadioButtonId() == R.id.show;
+            int maxNum = 9;
+
+            if (!TextUtils.isEmpty(mRequestNum.getText())) {
+                try {
+                    maxNum = Integer.valueOf(mRequestNum.getText().toString());
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                }
+            }*/
+            MultiImageSelector selector = MultiImageSelector.create(getActivity());
+//            selector.showCamera(showCamera);
+//            selector.count(maxNum);
+            selector.showCamera(true);
+            selector.single();
+         /*   if (mChoiceMode.getCheckedRadioButtonId() == R.id.single) {
+                selector.single();
+            } else {
+                selector.single();
+            }*/
+            selector.origin(mSelectPath);
+            selector.start(getActivity(), REQUEST_IMAGE);
+        }
+    }
+
+
+    private void requestPermission(final String permission, String rationale, final int requestCode){
+        if(ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), permission)){
+            new AlertDialog.Builder(getActivity())
+                    .setTitle(R.string.mis_permission_dialog_title)
+                    .setMessage(rationale)
+                    .setPositiveButton(R.string.mis_permission_dialog_ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            ActivityCompat.requestPermissions(getActivity(), new String[]{permission}, requestCode);
+                        }
+                    })
+                    .setNegativeButton(R.string.mis_permission_dialog_cancel, null)
+                    .create().show();
+        }else{
+            ActivityCompat.requestPermissions(getActivity(), new String[]{permission}, requestCode);
+        }
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == REQUEST_IMAGE){
             if(resultCode == RESULT_OK){
                 mSelectPath = data.getStringArrayListExtra(MultiImageSelector.EXTRA_RESULT);
@@ -296,10 +373,23 @@ public class MeFragment extends BaseFragment {
                 }
 //                mResultText.setText(sb.toString());
                 Toast.makeText(getActivity(), sb.toString()+"", Toast.LENGTH_SHORT).show();
-                Log.d(sb.toString(),"44444444444444");
             }
         }
-        super.onActivityResult(requestCode, resultCode, data);
-
     }
+
+    /* @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == REQUEST_IMAGE){
+            if(resultCode == RESULT_OK){
+                mSelectPath = data.getStringArrayListExtra(MultiImageSelector.EXTRA_RESULT);
+                StringBuilder sb = new StringBuilder();
+                for(String p: mSelectPath){
+                    sb.append(p);
+                    sb.append("\n");
+                }
+                mResultText.setText(sb.toString());
+            }
+        }
+    }*/
 }

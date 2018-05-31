@@ -85,10 +85,7 @@ public class HomeFragment extends Fragment implements OnBannerListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        ImmersionBar.with(getActivity())
 
-                .statusBarDarkFont(true, 1f)
-                .init();
         unbinder = ButterKnife.bind(this, view);
         xRefreshView= (XRefreshView) view.findViewById(R.id.xrefreshview);
         initData();
@@ -188,6 +185,16 @@ startActivity(new Intent(getActivity(),WebViewActivity.class));
         isLeft = !isLeft;
         return isLeft ? 0 : 1;
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ImmersionBar.with(getActivity())
+
+                .statusBarDarkFont(true, 1f)
+                .init();
+    }
+
     private void initData() {
         for (int i = 0; i < 15; i++) {
             Person person = new Person("2018年5月下半月培训计划" + i, "" + i);

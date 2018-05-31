@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.project.zaixianjiaoyu.R;
 import com.project.zaixianjiaoyu.activity.ShipinActivity;
+import com.project.zaixianjiaoyu.statusbar.ImmersionBar;
 import com.project.zaixianjiaoyu.util.GlideCircleTransform;
 
 import butterknife.BindView;
@@ -84,7 +85,14 @@ public class TouziFragment extends BaseFragment {
         super.onDestroyView();
         unbinder.unbind();
     }
+    @Override
+    public void onResume() {
+        super.onResume();
+        ImmersionBar.with(getActivity())
 
+                .statusBarDarkFont(true, 1f)
+                .init();
+    }
     @OnClick({R.id.text_name, R.id.text_gognsi, R.id.text_fist, R.id.text_setconnd, R.id.recycler_view_test_item_person_name_tv, R.id.text_fisr, R.id.text_fourth, R.id.layout_first, R.id.text_fidt, R.id.text_fourth3, R.id.text_daoshudier, R.id.text_oed, R.id.layout_34})
     public void onViewClicked(View view) {
         switch (view.getId()) {

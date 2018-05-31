@@ -253,5 +253,12 @@ showLoading();
         unbinder.unbind();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        ImmersionBar.with(getActivity())
 
+                .statusBarDarkFont(true, 1f)
+                .init();
+    }
 }

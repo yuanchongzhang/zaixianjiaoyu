@@ -81,7 +81,7 @@
         <activity android:name=".BannerActivity"></activity>
         <activity android:name=".DimensActivity"></activity>
         <activity android:name=".HideFragmentActivity"
-
+            android:screenOrientation="portrait"
 
             ></activity>
 
@@ -151,6 +151,8 @@
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:hardwareAccelerated="true"
             android:screenOrientation="portrait"></activity>
+
+        <activity android:name=".activity.SelectPicActivity"></activity>
 
     </application>
 

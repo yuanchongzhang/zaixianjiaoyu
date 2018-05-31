@@ -1,9 +1,12 @@
 package com.project.zaixianjiaoyu;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -11,11 +14,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.project.zaixianjiaoyu.activity.BaseActivity;
+import com.project.zaixianjiaoyu.activity.Loginactivity;
 import com.project.zaixianjiaoyu.fragment.DiSiFragment;
 import com.project.zaixianjiaoyu.fragment.HomeFragment;
 import com.project.zaixianjiaoyu.fragment.MeFragment;
 import com.project.zaixianjiaoyu.fragment.MoreFragment;
 import com.project.zaixianjiaoyu.fragment.TouziFragment;
+import com.project.zaixianjiaoyu.util.SharePreferenceUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -68,6 +73,8 @@ public class HideFragmentActivity extends BaseActivity {
     private DiSiFragment moreFragment2;
     private FragmentTransaction ft;
 
+    String token;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,6 +82,8 @@ public class HideFragmentActivity extends BaseActivity {
         ButterKnife.bind(this);
         EventBus.getDefault().register(this);
         setSelect(0);
+        token = (String) SharePreferenceUtil.get(this, "token", "");
+
     }
 
 
@@ -169,7 +178,18 @@ public class HideFragmentActivity extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.iv_home, R.id.tv_home, R.id.ll_home, R.id.iv_touzi, R.id.tv_touzi, R.id.ll_touzi, R.id.iv_me, R.id.tv_me, R.id.ll_me, R.id.iv_more, R.id.tv_more, R.id.ll_more,R.id.iv_fourth, R.id.tv_fourth, R.id.ll_me_fourth})
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+//将值传入DemoFragment
+//        this.getSupportFragmentManager().findFragmentByTag(MeFragment.class.getSimpleName()).onActivityResult(requestCode, resultCode, data);
+//   FragmentManager fragmentManager=getSupportFragmentManager().findFragmentByTag(MeFragment.class.getSimpleName()).onActivityResult(requestCode, resultCode, data);
+
+    }
+
+    @OnClick({R.id.iv_home, R.id.tv_home, R.id.ll_home, R.id.iv_touzi, R.id.tv_touzi, R.id.ll_touzi, R.id.iv_me, R.id.tv_me, R.id.ll_me, R.id.iv_more, R.id.tv_more, R.id.ll_more, R.id.iv_fourth, R.id.tv_fourth, R.id.ll_me_fourth})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_home:
@@ -191,32 +211,38 @@ public class HideFragmentActivity extends BaseActivity {
                 setSelect(1);
                 break;
             case R.id.iv_me:
-                setSelect(2);
-                break;
+
             case R.id.tv_me:
-                setSelect(2);
-                break;
+
             case R.id.ll_me:
-                setSelect(2);
+                token = (String) SharePreferenceUtil.get(this, "token", "");
+                if (TextUtils.isEmpty(token)) {
+                    startActivity(new Intent(HideFragmentActivity.this, Loginactivity.class));
+                }else {
+                    setSelect(2);
+                }
                 break;
             case R.id.iv_more:
-                setSelect(3);
-                break;
+
             case R.id.tv_more:
-                setSelect(3);
-                break;
+
             case R.id.ll_more:
+
                 setSelect(3);
                 break;
 
             case R.id.iv_fourth:
-                setSelect(4);
-                break;
+
+
             case R.id.tv_fourth:
-                setSelect(4);
-                break;
+
+
             case R.id.ll_me_fourth:
-                setSelect(4);
+
+                    setSelect(4);
+
+
+
                 break;
         }
     }
@@ -235,4 +261,9 @@ public class HideFragmentActivity extends BaseActivity {
     }
 
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        return super.onKeyDown(keyCode, event);
+
+    }
 }

@@ -52,4 +52,8 @@
     <color name="header">#58567D</color>
     <color name="grgray">#686868</color>
     <color name="scan_corner_color">#0effc2</color>
+    <color name="permissionColorGreen">#41c236</color>
+    <color name="permissionColorWhite">#ffffff</color>
+    <color name="permissionBgColorGreenLight">#44A49C</color>
+    <color name="permissionBgColorBlue">#ee447AA4</color>
 </resources>

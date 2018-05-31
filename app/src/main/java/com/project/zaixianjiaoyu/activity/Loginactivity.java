@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.project.zaixianjiaoyu.R;
 import com.project.zaixianjiaoyu.statusbar.ImmersionBar;
+import com.project.zaixianjiaoyu.util.SharePreferenceUtil;
 import com.project.zaixianjiaoyu.util.ToastUtil;
 
 import butterknife.BindView;
@@ -54,19 +55,19 @@ public class Loginactivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+        tvTitle.setText("登录");
         ImmersionBar.with(this)
-
                 .statusBarDarkFont(true, 1f)
                 .init();
 
         userPhoneNum.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
-if (b && !TextUtils.isEmpty(userPhoneNum.getText().toString())){
-    imgClearUser.setVisibility(View.VISIBLE);
-}else {
-    imgClearUser.setVisibility(View.GONE);
-}
+                if (b && !TextUtils.isEmpty(userPhoneNum.getText().toString())) {
+                    imgClearUser.setVisibility(View.VISIBLE);
+                } else {
+                    imgClearUser.setVisibility(View.GONE);
+                }
 
 
             }
@@ -87,9 +88,9 @@ if (b && !TextUtils.isEmpty(userPhoneNum.getText().toString())){
             @Override
             public void afterTextChanged(Editable editable) {
 
-                if (TextUtils.isEmpty(userPhoneNum.getText().toString())){
+                if (TextUtils.isEmpty(userPhoneNum.getText().toString())) {
                     imgClearUser.setVisibility(View.GONE);
-                }else {
+                } else {
                     imgClearUser.setVisibility(View.VISIBLE);
                 }
 
@@ -100,39 +101,39 @@ if (b && !TextUtils.isEmpty(userPhoneNum.getText().toString())){
         userPassword.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
-                if (b && !TextUtils.isEmpty(userPassword.getText().toString())){
+                if (b && !TextUtils.isEmpty(userPassword.getText().toString())) {
                     imgClear.setVisibility(View.VISIBLE);
-                }else {
+                } else {
                     imgClear.setVisibility(View.GONE);
                 }
 
 
             }
         });
-userPassword.addTextChangedListener(new TextWatcher() {
-    @Override
-    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        userPassword.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (TextUtils.isEmpty(userPassword.getText().toString())) {
+                    imgClear.setVisibility(View.GONE);
+                } else {
+                    imgClear.setVisibility(View.VISIBLE);
+                }
+            }
+        });
 
     }
 
-    @Override
-    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-    }
-
-    @Override
-    public void afterTextChanged(Editable editable) {
-if (TextUtils.isEmpty(userPassword.getText().toString())){
-    imgClear.setVisibility(View.GONE);
-}else {
-    imgClear.setVisibility(View.VISIBLE);
-}
-    }
-});
-
-    }
-
-    @OnClick({R.id.img_back, R.id.rl_back, R.id.tv_title, R.id.rl_top_layout, R.id.user_phone_num, R.id.img_clear_user, R.id.user_password, R.id.img_clear, R.id.btn_login,R.id.text_forget, R.id.linearlayout_forget})
+    @OnClick({R.id.img_back, R.id.rl_back, R.id.tv_title, R.id.rl_top_layout, R.id.user_phone_num, R.id.img_clear_user, R.id.user_password, R.id.img_clear, R.id.btn_login, R.id.text_forget, R.id.linearlayout_forget})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.img_back:
@@ -159,22 +160,25 @@ if (TextUtils.isEmpty(userPassword.getText().toString())){
                 userPassword.setText("");
                 break;
             case R.id.btn_login:
-                if (TextUtils.isEmpty(userPhoneNum.getText().toString())){
-                    ToastUtil.showCenterToast(this,"用户名不能为空");
-                }else if (TextUtils.isEmpty(userPassword.getText().toString())){
-                    ToastUtil.showCenterToast(this,"密码不能为空");
-                }else {
-                    ToastUtil.showCenterToast(this,"登录");
+                if (TextUtils.isEmpty(userPhoneNum.getText().toString())) {
+                    ToastUtil.showCenterToast(this, "用户名不能为空");
+                } else if (TextUtils.isEmpty(userPassword.getText().toString())) {
+                    ToastUtil.showCenterToast(this, "密码不能为空");
+                } else {
+                    ToastUtil.showCenterToast(this, "登录");
+                    SharePreferenceUtil.put(Loginactivity.this, "token", "2345");
+                    finish();
+
                 }
 
 
                 break;
             case R.id.text_forget:
-                startActivity(new Intent(Loginactivity.this,ForgetActivity.class));
+                startActivity(new Intent(Loginactivity.this, ForgetActivity.class));
 
                 break;
             case R.id.linearlayout_forget:
-                startActivity(new Intent(Loginactivity.this,ForgetActivity.class));
+                startActivity(new Intent(Loginactivity.this, ForgetActivity.class));
                 break;
         }
     }

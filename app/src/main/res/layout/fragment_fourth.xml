@@ -25,6 +25,7 @@ android:fitsSystemWindows="true"
             android:src="@mipmap/erweima"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/dp_10"
+            android:visibility="gone"
             />
 
         <LinearLayout

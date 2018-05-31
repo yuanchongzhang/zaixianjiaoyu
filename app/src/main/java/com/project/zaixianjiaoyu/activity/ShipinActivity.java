@@ -27,6 +27,7 @@ public class ShipinActivity extends BaseActivity{
                 , JZVideoPlayerStandard.SCREEN_WINDOW_NORMAL, "饺子闭眼睛");
   JZVideoPlayer.FULLSCREEN_ORIENTATION = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
         JZVideoPlayer.NORMAL_ORIENTATION = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
+
     }
 
     @Override

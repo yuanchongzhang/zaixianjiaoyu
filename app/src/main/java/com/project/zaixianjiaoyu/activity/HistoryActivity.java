@@ -13,8 +13,8 @@ import android.widget.Toast;
 
 import com.project.zaixianjiaoyu.R;
 import com.project.zaixianjiaoyu.adapter.HistoryAdapter;
-import com.project.zaixianjiaoyu.adapter.XiaoXiAdapter;
 import com.project.zaixianjiaoyu.refreshview.XRefreshView;
+import com.project.zaixianjiaoyu.statusbar.ImmersionBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,10 +26,6 @@ import butterknife.OnClick;
 public class HistoryActivity extends BaseActivity {
 
 
-    @BindView(R.id.img_back)
-    ImageView imgBack;
-    @BindView(R.id.rl_back)
-    RelativeLayout rlBack;
     @BindView(R.id.tv_title)
     TextView tvTitle;
     @BindView(R.id.rl_top_layout)
@@ -40,21 +36,30 @@ public class HistoryActivity extends BaseActivity {
     XRefreshView xrefreshview;
     HistoryAdapter xiaoXiAdapter;
     LinearLayoutManager layoutManager;
+    @BindView(R.id.img_back)
+    ImageView imgBack;
+    @BindView(R.id.rl_back)
+    RelativeLayout rlBack;
     private int mLoadCount = 0;
-    List<String> datas=new ArrayList<>();
+    List<String> datas = new ArrayList<>();
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
         ButterKnife.bind(this);
         recyclerViewTestRv.setHasFixedSize(true);
+        ImmersionBar.with(this)
+
+                .statusBarDarkFont(true, 1f)
+                .init();
         xrefreshview.setPullLoadEnable(true);
         for (int i = 0; i < 10; i++) {
             datas.add("消息" + i);
         }
         tvTitle.setText("收藏历史");
 
-        xiaoXiAdapter =new HistoryAdapter(this, datas);
+        xiaoXiAdapter = new HistoryAdapter(this, datas);
 
 //        adapter = new SimpleAdapter(personList, getActivity());
         layoutManager = new LinearLayoutManager(this);
@@ -94,12 +99,21 @@ public class HistoryActivity extends BaseActivity {
         xiaoXiAdapter.setOnItemClickListener(new HistoryAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Toast.makeText(HistoryActivity.this, position+"", Toast.LENGTH_SHORT).show();
+                Toast.makeText(HistoryActivity.this, position + "", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    @OnClick(R.id.img_back)
-    public void onViewClicked() {
+
+    @OnClick({R.id.img_back, R.id.rl_back})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.img_back:
+                finish();
+                break;
+            case R.id.rl_back:
+                finish();
+                break;
+        }
     }
 }
