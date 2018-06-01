@@ -184,7 +184,7 @@
                 android:paddingLeft="@dimen/dp_15"
                 android:paddingRight="@dimen/dp_15"
                 android:paddingTop="@dimen/dp_3"
-                android:text="已签到"
+                android:text="设置"
                 android:textColor="#001117" />
 
         </LinearLayout>

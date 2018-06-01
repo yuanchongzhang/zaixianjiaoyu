@@ -34,6 +34,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.project.zaixianjiaoyu.BuildConfig;
 import com.project.zaixianjiaoyu.R;
 import com.project.zaixianjiaoyu.activity.AliWxPayActivity;
+import com.project.zaixianjiaoyu.activity.AnswerActivity;
 import com.project.zaixianjiaoyu.activity.FeedBackActivity;
 import com.project.zaixianjiaoyu.activity.HistoryActivity;
 import com.project.zaixianjiaoyu.activity.Loginactivity;
@@ -224,6 +225,9 @@ public class MeFragment extends BaseFragment {
                 break;
             case R.id.text_kaoshi:
                 Toast.makeText(getActivity(), "考试", Toast.LENGTH_SHORT).show();
+//               startActivity(new Intent(getActivity(), AnswerActivity.class));
+
+
                 break;
             case R.id.text_goumai:
 //                Toast.makeText(getActivity(), "购买课程", Toast.LENGTH_SHORT).show();

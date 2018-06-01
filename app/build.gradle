@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.jakewharton.butterknife'
 android {
     compileSdkVersion 25
-    buildToolsVersion "26.0.2"
+    buildToolsVersion '25.0.0'
     defaultConfig {
         applicationId "com.project.zaixianjiaoyu"
         minSdkVersion 15
@@ -13,13 +13,13 @@ android {
 //        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
 
-        ndk {
-            abiFilters  "armeabi-v7a"  // 指定要ndk需要兼容的架构(这样其他依赖包里mips,x86,armeabi,arm-v8之类的so会被过滤掉)
-        }
+//        ndk {
+//            abiFilters  "armeabi-v7a"  // 指定要ndk需要兼容的架构(这样其他依赖包里mips,x86,armeabi,arm-v8之类的so会被过滤掉)
+//        }
     }
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -42,6 +42,11 @@ android {
             storeFile file(filePath)
             storePassword(password)
         }
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
     }
 }
 repositories {

@@ -23,8 +23,8 @@ buildscript {
     repositories {
         mavenCentral()
         maven { url "https://jitpack.io" }
-        maven { url 'https://maven.google.com' }
-        google()
+//        maven { url 'https://maven.google.com' }
+//        google()
     }
     dependencies {
         classpath 'com.jakewharton:butterknife-gradle-plugin:8.8.1'

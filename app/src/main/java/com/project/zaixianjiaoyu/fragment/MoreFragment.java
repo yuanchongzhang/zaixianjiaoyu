@@ -46,12 +46,12 @@ public class MoreFragment extends BaseFragment {
     Unbinder unbinder;
     @BindView(R.id.recycler_view_test_rv)
     RecyclerView recyclerViewTestRv;
-
+    @BindView(R.id.xrefreshview)
     XRefreshView xrefreshview;
     private int page = 1;
     private int totalpage = 0;
 
-    List<ShangPin.DataBean> contentBean3 = new ArrayList<>();
+    List<ShangPin.DataBean> contentBean3 ;
     MyAdapter myAdapter;
 
     private int mLoadCount = 0;
@@ -66,9 +66,7 @@ public class MoreFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_fourth, null);
 
         unbinder = ButterKnife.bind(this, view);
-        ImmersionBar.setFitsSystemWindows(getActivity());
-
-        xrefreshview = (XRefreshView) view.findViewById(R.id.xrefreshview);
+        contentBean3=new ArrayList<>();
 
         xrefreshview.setPullLoadEnable(true);
         xrefreshview.setPinnedTime(1000);
@@ -214,20 +212,21 @@ public class MoreFragment extends BaseFragment {
                     public void onBefore(BaseRequest request) {
                         super.onBefore(request);
 //                        showLoading();
-showLoading();
+                        showLoading();
                     }
 
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
                         Log.d(s, "eeeeeeeeeeeeeeeeeeeee");
 //                        Log.d(s, "eeeeeeeeeeeeeeeeeeeee");
-
                         ShangPin fenLeiBean = new ShangPin();
                         Gson gson = new Gson();
                         fenLeiBean = gson.fromJson(s, ShangPin.class);
                         contentBean3 = fenLeiBean.getData();
                         totalpage = fenLeiBean.getPages();
 //                        contentBean3.addAll(contentBean3);
+//                        contentBean3.addAll(fenLeiBean.getData());
+
                         myAdapter.setData(fenLeiBean.getData());
 
                     }

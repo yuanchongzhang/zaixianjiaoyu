@@ -18,10 +18,7 @@ public class BaseFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        ImmersionBar.with(getActivity())
 
-                .statusBarDarkFont(true, 1f)
-                .init();
         return super.onCreateView(inflater, container, savedInstanceState);
 
     }

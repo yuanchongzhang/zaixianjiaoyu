@@ -80,7 +80,7 @@ public class HideFragmentActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hidefragment);
         ButterKnife.bind(this);
-        EventBus.getDefault().register(this);
+//        EventBus.getDefault().register(this);
         setSelect(0);
         token = (String) SharePreferenceUtil.get(this, "token", "");
 
@@ -247,7 +247,7 @@ public class HideFragmentActivity extends BaseActivity {
         }
     }
 
-    public void onEventMainThread(Integer type) {
+ /*   public void onEventMainThread(Integer type) {
         Log.e("---", "EventBus收到int:" + type);
         if (type == 0) {
             setSelect(0);
@@ -258,7 +258,7 @@ public class HideFragmentActivity extends BaseActivity {
         }
 
 
-    }
+    }*/
 
 
     @Override
