@@ -39,6 +39,7 @@ import com.project.zaixianjiaoyu.activity.FeedBackActivity;
 import com.project.zaixianjiaoyu.activity.HistoryActivity;
 import com.project.zaixianjiaoyu.activity.Loginactivity;
 import com.project.zaixianjiaoyu.activity.SelectPicActivity;
+import com.project.zaixianjiaoyu.activity.ShenFenCardActivity;
 import com.project.zaixianjiaoyu.activity.ShibieActivity;
 import com.project.zaixianjiaoyu.alipay.AuthResult;
 import com.project.zaixianjiaoyu.alipay.OrderInfoUtil2_0;
@@ -297,8 +298,8 @@ public class MeFragment extends BaseFragment {
                 break;
             case R.id.text_settings:
 //                Toast.makeText(getActivity(), "设置", Toast.LENGTH_SHORT).show();
-               startActivity(new Intent(getActivity(),ShibieActivity.class));
-
+//               startActivity(new Intent(getActivity(),ShibieActivity.class));
+                startActivity(new Intent(getActivity(),ShenFenCardActivity.class));
                 break;
         }
     }

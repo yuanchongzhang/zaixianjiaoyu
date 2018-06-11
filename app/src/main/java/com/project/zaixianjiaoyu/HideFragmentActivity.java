@@ -7,11 +7,15 @@ import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.project.zaixianjiaoyu.activity.BaseActivity;
 import com.project.zaixianjiaoyu.activity.Loginactivity;
@@ -20,6 +24,7 @@ import com.project.zaixianjiaoyu.fragment.HomeFragment;
 import com.project.zaixianjiaoyu.fragment.MeFragment;
 import com.project.zaixianjiaoyu.fragment.MoreFragment;
 import com.project.zaixianjiaoyu.fragment.TouziFragment;
+import com.project.zaixianjiaoyu.statusbar.ImmersionBar;
 import com.project.zaixianjiaoyu.util.SharePreferenceUtil;
 
 import butterknife.BindView;
@@ -83,7 +88,10 @@ public class HideFragmentActivity extends BaseActivity {
 //        EventBus.getDefault().register(this);
         setSelect(0);
         token = (String) SharePreferenceUtil.get(this, "token", "");
+        ImmersionBar.with(this)
 
+                .statusBarDarkFont(true, 1f)
+                .init();
     }
 
 
@@ -265,5 +273,42 @@ public class HideFragmentActivity extends BaseActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         return super.onKeyDown(keyCode, event);
 
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        MenuInflater mif = getMenuInflater();
+        mif.inflate(R.menu.activity_main_drawer, menu);
+        return true;
+    }
+    // 菜单项被选择事件
+/*    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.nav_camera:
+                Toast.makeText(HideFragmentActivity.this, "我的项目", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.nav_gallery:
+                Toast.makeText(HideFragmentActivity.this, "我的任务", Toast.LENGTH_SHORT).show();
+                break;
+        }
+        //返回父类执行
+        return super.onMenuItemSelected(item);
+    }*/
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.nav_camera:
+                Toast.makeText(HideFragmentActivity.this, "我的项目", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.nav_gallery:
+                Toast.makeText(HideFragmentActivity.this, "我的任务", Toast.LENGTH_SHORT).show();
+                break;
+        }
+//        return super.onOptionsItemSelected(item);
+        return true;
     }
 }

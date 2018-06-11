@@ -157,6 +157,9 @@
 
         <activity android:name=".activity.AnswerActivity"></activity>
 
+
+        <activity android:name=".activity.ShenFenCardActivity"></activity>
+
     </application>
 
 
