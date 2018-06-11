@@ -7,13 +7,12 @@
     android:background="@color/white"
 
     tools:openDrawer="start">
- <!--   android:fitsSystemWindows="true"-->
+    <!--   android:fitsSystemWindows="true"-->
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:background="@color/white"
-        >
+        android:orientation="vertical">
 
         <FrameLayout
             android:id="@+id/content"
@@ -23,17 +22,26 @@
 
         <include layout="@layout/main_bottom" />
     </LinearLayout>
-    <android.support.design.widget.NavigationView
-        android:id="@+id/nav_view"
-        android:layout_width="wrap_content"
+<!--  <android.support.design.widget.NavigationView
+          android:id="@+id/nav_view"
+          android:layout_width="wrap_content"
+          android:layout_height="match_parent"
+          android:layout_gravity="start"
+          android:fitsSystemWindows="true"
+          app:headerLayout="@layout/nav_header_main"
+          app:menu="@menu/activity_main_drawer"
+          android:background="#202C32"
+          android:visibility="visible"
+     />-->
+   <fragment
+        android:id="@+id/fg_right_menu"
+        android:name="com.project.zaixianjiaoyu.fragment.RightFragment"
+        android:layout_width="250dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:fitsSystemWindows="true"
-        app:headerLayout="@layout/nav_header_main"
-        app:menu="@menu/activity_main_drawer"
-        android:background="#202C32"
-   />
+        android:tag="LEFT"
 
+        tools:layout="@layout/fg_right" />
     <!--app:menu="@menu/activity_main_drawer"
         app:headerLayout="@layout/nav_header_main"
             app:menu="@menu/activity_main_drawer"

@@ -10,25 +10,29 @@
 
             android:title="我的项目"
             android:icon="@drawable/ic_menu_gallery"
-
+            android:clickable="true"
             />
 
       <!--  android:icon="@drawable/ic_menu_gallery"-->
         <item
             android:id="@+id/nav_gallery"
             android:icon="@drawable/ic_menu_gallery"
+            android:clickable="true"
             android:title="我的任务" />
         <item
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_menu_gallery"
+            android:clickable="true"
             android:title="我的日历" />
         <item
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_menu_gallery"
+            android:clickable="true"
             android:title="我的报表" />
 
         <item
             android:icon="@drawable/ic_menu_gallery"
+            android:clickable="true"
 
             android:title="我的仪表盘" />
     </group>

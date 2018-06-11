@@ -4,8 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.DrawerLayout;
 import android.text.TextUtils;
-import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -23,6 +24,7 @@ import com.project.zaixianjiaoyu.fragment.DiSiFragment;
 import com.project.zaixianjiaoyu.fragment.HomeFragment;
 import com.project.zaixianjiaoyu.fragment.MeFragment;
 import com.project.zaixianjiaoyu.fragment.MoreFragment;
+import com.project.zaixianjiaoyu.fragment.RightFragment;
 import com.project.zaixianjiaoyu.fragment.TouziFragment;
 import com.project.zaixianjiaoyu.statusbar.ImmersionBar;
 import com.project.zaixianjiaoyu.util.SharePreferenceUtil;
@@ -30,7 +32,6 @@ import com.project.zaixianjiaoyu.util.SharePreferenceUtil;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import de.greenrobot.event.EventBus;
 
 /**
  * Created by Administrator on 2017/10/23.
@@ -69,6 +70,8 @@ public class HideFragmentActivity extends BaseActivity {
     TextView tvFourth;
     @BindView(R.id.ll_me_fourth)
     LinearLayout llMeFourth;
+    @BindView(R.id.drawer_layout)
+    DrawerLayout drawerLayout;
 
     private HomeFragment homeFragment;
     private TouziFragment touziFragment;
@@ -79,6 +82,9 @@ public class HideFragmentActivity extends BaseActivity {
     private FragmentTransaction ft;
 
     String token;
+    private RightFragment fg_right_menu;
+
+    private FragmentManager fManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,11 +93,41 @@ public class HideFragmentActivity extends BaseActivity {
         ButterKnife.bind(this);
 //        EventBus.getDefault().register(this);
         setSelect(0);
+        fManager = getSupportFragmentManager();
+        fg_right_menu = (RightFragment) fManager.findFragmentById(R.id.fg_right_menu);
         token = (String) SharePreferenceUtil.get(this, "token", "");
         ImmersionBar.with(this)
 
                 .statusBarDarkFont(true, 1f)
                 .init();
+   /*     drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED,
+                Gravity.END);*/
+
+        drawerLayout.setDrawerListener(new DrawerLayout.DrawerListener() {
+            @Override
+            public void onDrawerSlide(View view, float v) {
+
+            }
+
+            @Override
+            public void onDrawerOpened(View view) {
+
+            }
+
+            @Override
+            public void onDrawerClosed(View view) {
+              /*  drawerLayout.setDrawerLockMode(
+                        DrawerLayout.LOCK_MODE_LOCKED_CLOSED, Gravity.END);*/
+            }
+
+            @Override
+            public void onDrawerStateChanged(int i) {
+
+            }
+        });
+
+
+
     }
 
 
@@ -226,7 +262,7 @@ public class HideFragmentActivity extends BaseActivity {
                 token = (String) SharePreferenceUtil.get(this, "token", "");
                 if (TextUtils.isEmpty(token)) {
                     startActivity(new Intent(HideFragmentActivity.this, Loginactivity.class));
-                }else {
+                } else {
                     setSelect(2);
                 }
                 break;
@@ -247,8 +283,7 @@ public class HideFragmentActivity extends BaseActivity {
 
             case R.id.ll_me_fourth:
 
-                    setSelect(4);
-
+                setSelect(4);
 
 
                 break;
@@ -284,19 +319,7 @@ public class HideFragmentActivity extends BaseActivity {
         return true;
     }
     // 菜单项被选择事件
-/*    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.nav_camera:
-                Toast.makeText(HideFragmentActivity.this, "我的项目", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.nav_gallery:
-                Toast.makeText(HideFragmentActivity.this, "我的任务", Toast.LENGTH_SHORT).show();
-                break;
-        }
-        //返回父类执行
-        return super.onMenuItemSelected(item);
-    }*/
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -310,5 +333,9 @@ public class HideFragmentActivity extends BaseActivity {
         }
 //        return super.onOptionsItemSelected(item);
         return true;
+    }
+
+    @OnClick(R.id.drawer_layout)
+    public void onViewClicked() {
     }
 }
