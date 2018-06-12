@@ -134,9 +134,6 @@
             android:name=".activity.ShibieActivity"
             android:screenOrientation="portrait"></activity>
         <activity
-            android:name=".activity.IdCardActivity"
-            android:screenOrientation="portrait"></activity>
-        <activity
             android:name=".activity.FaceOnlineVerifyActivity"
             android:screenOrientation="portrait"></activity>
 
@@ -159,7 +156,6 @@
 
 
         <activity android:name=".activity.ShenFenCardActivity"></activity>
-
     </application>
 
 

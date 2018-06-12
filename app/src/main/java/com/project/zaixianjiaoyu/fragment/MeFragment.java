@@ -72,7 +72,7 @@ import me.nereo.multi_image_selector.MultiImageSelector;
 import me.nereo.multi_image_selector.MultiImageSelectorActivity;
 
 import static android.app.Activity.RESULT_OK;
-import static com.project.zaixianjiaoyu.activity.IdCardActivity.REQUEST_CODE_CAMERA;
+
 
 
 /**

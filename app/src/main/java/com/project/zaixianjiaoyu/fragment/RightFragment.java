@@ -1,20 +1,20 @@
 package com.project.zaixianjiaoyu.fragment;
 
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AlertDialog;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.project.zaixianjiaoyu.R;
+import com.project.zaixianjiaoyu.util.GlideCircleTransform;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,31 +27,27 @@ import butterknife.Unbinder;
 public class RightFragment extends Fragment {
 
 
-    Unbinder unbinder;
-    private DrawerLayout drawer_layout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fg_right, container, false);
-
-
+/*
         unbinder = ButterKnife.bind(this, view);
+
+        Glide.with(getActivity())
+                .load("http://img05.tooopen.com/images/20150820/tooopen_sy_139205349641.jpg")
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .crossFade()
+                .transform(new GlideCircleTransform(getActivity()))
+                .into(imgHead);*/
+
         return view;
     }
 
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-
-        unbinder.unbind();
-    }
 
 
 
-    public void setDrawerLayout(DrawerLayout drawer_layout) {
-        this.drawer_layout = drawer_layout;
-    }
 
 
 }

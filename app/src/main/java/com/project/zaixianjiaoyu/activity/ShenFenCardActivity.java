@@ -61,28 +61,28 @@ public class ShenFenCardActivity extends AppCompatActivity {
 
         //  初始化本地质量控制模型,释放代码在onDestory中
         //  调用身份证扫描必须加上 intent.putExtra(CameraActivity.KEY_NATIVE_MANUAL, true); 关闭自动初始化和释放本地模型
-        CameraNativeHelper.init(this, OCR.getInstance().getLicense(),
+        CameraNativeHelper.init(this, OCR.getInstance(this).getLicense(),
                 new CameraNativeHelper.CameraNativeInitCallback() {
-            @Override
-            public void onError(int errorCode, Throwable e) {
-                String msg;
-                switch (errorCode) {
-                    case CameraView.NATIVE_SOLOAD_FAIL:
-                        msg = "加载so失败，请确保apk中存在ui部分的so";
-                        break;
-                    case CameraView.NATIVE_AUTH_FAIL:
-                        msg = "授权本地质量控制token获取失败";
-                        break;
-                    case CameraView.NATIVE_INIT_FAIL:
-                        msg = "本地质量控制";
-                        break;
-                    default:
-                        msg = String.valueOf(errorCode);
-                }
-                infoTextView.setText("本地质量控制初始化错误，错误原因： " + msg);
-            }
-        });
-        
+                    @Override
+                    public void onError(int errorCode, Throwable e) {
+                        String msg;
+                        switch (errorCode) {
+                            case CameraView.NATIVE_SOLOAD_FAIL:
+                                msg = "加载so失败，请确保apk中存在ui部分的so";
+                                break;
+                            case CameraView.NATIVE_AUTH_FAIL:
+                                msg = "授权本地质量控制token获取失败";
+                                break;
+                            case CameraView.NATIVE_INIT_FAIL:
+                                msg = "本地质量控制";
+                                break;
+                            default:
+                                msg = String.valueOf(errorCode);
+                        }
+                        infoTextView.setText("本地质量控制初始化错误，错误原因： " + msg);
+                    }
+                });
+
         findViewById(R.id.gallery_button_front).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -178,7 +178,7 @@ public class ShenFenCardActivity extends AppCompatActivity {
         // 设置图像参数压缩质量0-100, 越大图像质量越好但是请求时间越长。 不设置则默认值为20
         param.setImageQuality(20);
 
-        OCR.getInstance().recognizeIDCard(param, new OnResultListener<IDCardResult>() {
+        OCR.getInstance(this).recognizeIDCard(param, new OnResultListener<IDCardResult>() {
             @Override
             public void onResult(IDCardResult result) {
                 if (result != null) {

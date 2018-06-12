@@ -84,4 +84,5 @@ dependencies {
     compile project(':ocr_ui')
     compile project(':jiaozivideoplayer')
     compile project(':multi-image-selector')
+    compile files('libs/ocr-sdk.jar')
 }
