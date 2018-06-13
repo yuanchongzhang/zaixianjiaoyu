@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,16 +14,30 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.project.zaixianjiaoyu.Constant;
 import com.project.zaixianjiaoyu.R;
+import com.project.zaixianjiaoyu.http.MyOkhttp;
+import com.project.zaixianjiaoyu.http.callback.StringNoDialogCallback;
+import com.project.zaixianjiaoyu.http.request.BaseRequest;
+import com.project.zaixianjiaoyu.model.AccessToken;
+import com.project.zaixianjiaoyu.model.LoginModel;
+import com.project.zaixianjiaoyu.model.TestBean;
 import com.project.zaixianjiaoyu.statusbar.ImmersionBar;
 import com.project.zaixianjiaoyu.util.SharePreferenceUtil;
 import com.project.zaixianjiaoyu.util.ToastUtil;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnTextChanged;
+import okhttp3.Call;
+import okhttp3.Response;
 
 public class Loginactivity extends BaseActivity {
 
@@ -165,9 +180,59 @@ public class Loginactivity extends BaseActivity {
                 } else if (TextUtils.isEmpty(userPassword.getText().toString())) {
                     ToastUtil.showCenterToast(this, "密码不能为空");
                 } else {
-                    ToastUtil.showCenterToast(this, "登录");
+                  /*  ToastUtil.showCenterToast(this, "登录");
                     SharePreferenceUtil.put(Loginactivity.this, "token", "2345");
-                    finish();
+                    finish();*/
+//                    http://221.208.29.24/webapi//api/login/Getlogin?cSys_UserID=wuxijuan&&cPassword=
+//                    String string = "http://221.208.29.24/webapi//api/login/Getlogin?cSys_UserID=wuxijuan&&cPassword=";
+                    String const_url = Constant.MODEL_URL + "/api/login/Getlogin?";
+
+//                    wuxijuan  123456
+                    MyOkhttp.get(const_url)
+                            .tag(this)
+                            .params("cSys_UserID", userPhoneNum.getText().toString())
+                            .params("cPassword", userPassword.getText().toString())
+                            .execute(new StringNoDialogCallback() {
+
+                                @Override
+                                public void onBefore(BaseRequest request) {
+                                    super.onBefore(request);
+
+                                    showLoading();
+                                }
+
+                                @Override
+                                public void onSuccess(String s, Call call, Response response) {
+                                    Log.d(s, "eeeeeeeeeeeeeeeeeeeee");
+                                    Log.d(s, "eeeeeeeeeeeeeeeeeeeee");
+                                    LoginModel loginModel = new LoginModel();
+                                    Gson gson = new Gson();
+                                    loginModel = gson.fromJson(s, LoginModel.class);
+
+                                    if (loginModel.isLoginResult() == true) {
+                                        SharePreferenceUtil.put(Loginactivity.this, "token", loginModel.getToken());
+                                        ToastUtil.showCenterToast(Loginactivity.this, "登录成功");
+                                        finish();
+                                    } else {
+                                        ToastUtil.showCenterToast(Loginactivity.this, loginModel.getErrorMessage());
+                                    }
+
+
+                                }
+
+                                @Override
+                                public void onError(Call call, Response response, Exception e) {
+                                    super.onError(call, response, e);
+                                    dismissLoading();
+                                }
+
+                                @Override
+                                public void onAfter(String s, Exception e) {
+                                    super.onAfter(s, e);
+                                    dismissLoading();
+                                }
+                            });
+
 
                 }
 

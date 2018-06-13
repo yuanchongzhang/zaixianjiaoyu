@@ -5,19 +5,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-
+android:clickable="true"
     tools:openDrawer="start">
     <!--   android:fitsSystemWindows="true"-->
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
+        android:clickable="true"
         android:orientation="vertical">
 
         <FrameLayout
             android:id="@+id/content"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:clickable="true"
             android:layout_weight="1"></FrameLayout>
 
         <include layout="@layout/main_bottom" />
@@ -33,15 +35,25 @@
           android:background="#202C32"
           android:visibility="visible"
      />-->
-   <fragment
+  <!-- <fragment
         android:id="@+id/fg_right_menu"
         android:name="com.project.zaixianjiaoyu.fragment.RightFragment"
         android:layout_width="250dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:tag="LEFT"
+        tools:layout="@layout/fg_right" />-->
 
-        tools:layout="@layout/fg_right" />
+    <include
+        android:layout_width="250dp"
+        android:clickable="true"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:tag="LEFT"
+
+        layout="@layout/fg_right"
+        />
+
     <!--app:menu="@menu/activity_main_drawer"
         app:headerLayout="@layout/nav_header_main"
             app:menu="@menu/activity_main_drawer"

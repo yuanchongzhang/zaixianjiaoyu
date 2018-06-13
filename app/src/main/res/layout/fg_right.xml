@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:background="#202C32"
     android:gravity="right"
+    android:clickable="true"
     android:orientation="vertical">
     <!--   android:background="@mipmap/drawerlayoutbackground"-->
     <LinearLayout

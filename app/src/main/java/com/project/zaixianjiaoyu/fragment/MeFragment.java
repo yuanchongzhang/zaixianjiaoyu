@@ -1,19 +1,13 @@
 package com.project.zaixianjiaoyu.fragment;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
@@ -31,14 +25,9 @@ import android.widget.Toast;
 import com.alipay.sdk.app.AuthTask;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.project.zaixianjiaoyu.BuildConfig;
 import com.project.zaixianjiaoyu.R;
-import com.project.zaixianjiaoyu.activity.AliWxPayActivity;
-import com.project.zaixianjiaoyu.activity.AnswerActivity;
 import com.project.zaixianjiaoyu.activity.FeedBackActivity;
 import com.project.zaixianjiaoyu.activity.HistoryActivity;
-import com.project.zaixianjiaoyu.activity.Loginactivity;
-import com.project.zaixianjiaoyu.activity.SelectPicActivity;
 import com.project.zaixianjiaoyu.activity.ShenFenCardActivity;
 import com.project.zaixianjiaoyu.activity.ShibieActivity;
 import com.project.zaixianjiaoyu.alipay.AuthResult;
@@ -47,21 +36,9 @@ import com.project.zaixianjiaoyu.alipay.PayResult;
 
 import com.project.zaixianjiaoyu.statusbar.ImmersionBar;
 import com.project.zaixianjiaoyu.util.GlideCircleTransform;
-import com.project.zaixianjiaoyu.util.ToastUtil;
-import com.tencent.smtt.export.external.interfaces.IX5WebViewBase;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -69,10 +46,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import me.nereo.multi_image_selector.MultiImageSelector;
-import me.nereo.multi_image_selector.MultiImageSelectorActivity;
 
 import static android.app.Activity.RESULT_OK;
-
 
 
 /**
@@ -186,10 +161,9 @@ public class MeFragment extends BaseFragment {
                 .into(imgPerson);
 
 
-
-
         return view;
     }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -198,6 +172,7 @@ public class MeFragment extends BaseFragment {
                 .statusBarDarkFont(true, 1f)
                 .init();
     }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -225,10 +200,10 @@ public class MeFragment extends BaseFragment {
                 pickImage();
                 break;
             case R.id.text_kaoshi:
-                Toast.makeText(getActivity(), "考试", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), "考试", Toast.LENGTH_SHORT).show();
 //               startActivity(new Intent(getActivity(), AnswerActivity.class));
-
-
+//                startActivity(new Intent(getActivity(), PracticeOrderActivity.class));
+                startActivity(new Intent(getActivity(), ShenFenCardActivity.class));
                 break;
             case R.id.text_goumai:
 //                Toast.makeText(getActivity(), "购买课程", Toast.LENGTH_SHORT).show();
@@ -288,18 +263,18 @@ public class MeFragment extends BaseFragment {
                 break;
             case R.id.text_history:
 //                Toast.makeText(getActivity(), "历史", Toast.LENGTH_SHORT).show();
-               startActivity(new Intent(getActivity(),HistoryActivity.class));
+                startActivity(new Intent(getActivity(), HistoryActivity.class));
 
                 break;
             case R.id.text_fankui:
 
-              startActivity(new Intent(getActivity(),FeedBackActivity.class));
+                startActivity(new Intent(getActivity(), FeedBackActivity.class));
 
                 break;
             case R.id.text_settings:
 //                Toast.makeText(getActivity(), "设置", Toast.LENGTH_SHORT).show();
-//               startActivity(new Intent(getActivity(),ShibieActivity.class));
-                startActivity(new Intent(getActivity(),ShenFenCardActivity.class));
+               startActivity(new Intent(getActivity(),ShibieActivity.class));
+//                startActivity(new Intent(getActivity(), ShenFenCardActivity.class));
                 break;
         }
     }
@@ -320,7 +295,7 @@ public class MeFragment extends BaseFragment {
             requestPermission(Manifest.permission.READ_EXTERNAL_STORAGE,
                     getString(R.string.mis_permission_rationale),
                     REQUEST_STORAGE_READ_ACCESS_PERMISSION);
-        }else {
+        } else {
          /*   boolean showCamera = mShowCamera.getCheckedRadioButtonId() == R.id.show;
             int maxNum = 9;
 
@@ -347,8 +322,8 @@ public class MeFragment extends BaseFragment {
     }
 
 
-    private void requestPermission(final String permission, String rationale, final int requestCode){
-        if(ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), permission)){
+    private void requestPermission(final String permission, String rationale, final int requestCode) {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), permission)) {
             new AlertDialog.Builder(getActivity())
                     .setTitle(R.string.mis_permission_dialog_title)
                     .setMessage(rationale)
@@ -360,7 +335,7 @@ public class MeFragment extends BaseFragment {
                     })
                     .setNegativeButton(R.string.mis_permission_dialog_cancel, null)
                     .create().show();
-        }else{
+        } else {
             ActivityCompat.requestPermissions(getActivity(), new String[]{permission}, requestCode);
         }
     }
@@ -368,16 +343,16 @@ public class MeFragment extends BaseFragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == REQUEST_IMAGE){
-            if(resultCode == RESULT_OK){
+        if (requestCode == REQUEST_IMAGE) {
+            if (resultCode == RESULT_OK) {
                 mSelectPath = data.getStringArrayListExtra(MultiImageSelector.EXTRA_RESULT);
                 StringBuilder sb = new StringBuilder();
-                for(String p: mSelectPath){
+                for (String p : mSelectPath) {
                     sb.append(p);
                     sb.append("\n");
                 }
 //                mResultText.setText(sb.toString());
-                Toast.makeText(getActivity(), sb.toString()+"", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), sb.toString() + "", Toast.LENGTH_SHORT).show();
             }
         }
     }

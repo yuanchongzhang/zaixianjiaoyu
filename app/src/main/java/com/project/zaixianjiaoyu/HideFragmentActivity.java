@@ -82,9 +82,9 @@ public class HideFragmentActivity extends BaseActivity {
     private FragmentTransaction ft;
 
     String token;
-    private RightFragment fg_right_menu;
+//    private RightFragment fg_right_menu;
 
-    private FragmentManager fManager;
+//    private FragmentManager fManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,8 +93,8 @@ public class HideFragmentActivity extends BaseActivity {
         ButterKnife.bind(this);
 //        EventBus.getDefault().register(this);
         setSelect(0);
-        fManager = getSupportFragmentManager();
-        fg_right_menu = (RightFragment) fManager.findFragmentById(R.id.fg_right_menu);
+        /*fManager = getSupportFragmentManager();
+        fg_right_menu = (RightFragment) fManager.findFragmentById(R.id.fg_right_menu);*/
         token = (String) SharePreferenceUtil.get(this, "token", "");
         ImmersionBar.with(this)
 
@@ -104,6 +104,9 @@ public class HideFragmentActivity extends BaseActivity {
                 Gravity.END);*/
 
         drawerLayout.setDrawerListener(new DrawerLayout.DrawerListener() {
+
+
+
             @Override
             public void onDrawerSlide(View view, float v) {
 
@@ -111,14 +114,20 @@ public class HideFragmentActivity extends BaseActivity {
 
             @Override
             public void onDrawerOpened(View view) {
-
+                drawerLayout.setClickable(true);
             }
 
             @Override
-            public void onDrawerClosed(View view) {
-              /*  drawerLayout.setDrawerLockMode(
-                        DrawerLayout.LOCK_MODE_LOCKED_CLOSED, Gravity.END);*/
+            public void onDrawerClosed(View drawerView) {
+
             }
+
+            /* @Override
+            public void onDrawerClosed(View view) {
+
+              *//*  drawerLayout.setDrawerLockMode(
+                        DrawerLayout.LOCK_MODE_LOCKED_CLOSED, Gravity.END);*//*
+            }*/
 
             @Override
             public void onDrawerStateChanged(int i) {
@@ -127,9 +136,13 @@ public class HideFragmentActivity extends BaseActivity {
         });
 
 
-
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+    }
 
     private void setSelect(int i) {
         FragmentManager fm = getSupportFragmentManager();
