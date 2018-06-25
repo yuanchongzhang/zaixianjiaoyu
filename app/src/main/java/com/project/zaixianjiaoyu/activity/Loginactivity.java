@@ -304,7 +304,7 @@ public class Loginactivity extends BaseActivity {
                         //vRegistrationPhoto 注册照 图片64位编号字符串
                         SharePreferenceUtil.put(Loginactivity.this, "vRegistrationPhoto", userInfoBean.getVRegistrationPhoto());
 
-
+                        finish();
                     }
 
                     @Override

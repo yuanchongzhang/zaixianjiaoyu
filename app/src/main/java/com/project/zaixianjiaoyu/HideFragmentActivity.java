@@ -106,7 +106,6 @@ public class HideFragmentActivity extends BaseActivity {
         drawerLayout.setDrawerListener(new DrawerLayout.DrawerListener() {
 
 
-
             @Override
             public void onDrawerSlide(View view, float v) {
 
@@ -259,13 +258,20 @@ public class HideFragmentActivity extends BaseActivity {
                 setSelect(0);
                 break;
             case R.id.iv_touzi:
-                setSelect(1);
-                break;
+
+
             case R.id.tv_touzi:
-                setSelect(1);
-                break;
+
+
             case R.id.ll_touzi:
-                setSelect(1);
+                token = (String) SharePreferenceUtil.get(this, "token", "");
+                if (TextUtils.isEmpty(token)) {
+                    startActivity(new Intent(HideFragmentActivity.this, Loginactivity.class));
+                } else {
+                    setSelect(1);
+                }
+
+
                 break;
             case R.id.iv_me:
 
