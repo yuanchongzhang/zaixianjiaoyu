@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -25,6 +26,7 @@ import com.project.zaixianjiaoyu.http.request.BaseRequest;
 import com.project.zaixianjiaoyu.model.AccessToken;
 import com.project.zaixianjiaoyu.model.LoginModel;
 import com.project.zaixianjiaoyu.model.TestBean;
+import com.project.zaixianjiaoyu.model.UserInfoBean;
 import com.project.zaixianjiaoyu.statusbar.ImmersionBar;
 import com.project.zaixianjiaoyu.util.SharePreferenceUtil;
 import com.project.zaixianjiaoyu.util.ToastUtil;
@@ -180,15 +182,10 @@ public class Loginactivity extends BaseActivity {
                 } else if (TextUtils.isEmpty(userPassword.getText().toString())) {
                     ToastUtil.showCenterToast(this, "密码不能为空");
                 } else {
-                  /*  ToastUtil.showCenterToast(this, "登录");
-                    SharePreferenceUtil.put(Loginactivity.this, "token", "2345");
-                    finish();*/
-//                    http://221.208.29.24/webapi//api/login/Getlogin?cSys_UserID=wuxijuan&&cPassword=
-//                    String string = "http://221.208.29.24/webapi//api/login/Getlogin?cSys_UserID=wuxijuan&&cPassword=";
-                    String const_url = Constant.MODEL_URL + "/api/login/Getlogin?";
 
-//                    wuxijuan  123456
-                    MyOkhttp.get(const_url)
+                    String const_url = Constant.MODEL_URL + "ActionApi/login/login";
+
+                    MyOkhttp.post(const_url)
                             .tag(this)
                             .params("cSys_UserID", userPhoneNum.getText().toString())
                             .params("cPassword", userPassword.getText().toString())
@@ -211,8 +208,13 @@ public class Loginactivity extends BaseActivity {
 
                                     if (loginModel.isLoginResult() == true) {
                                         SharePreferenceUtil.put(Loginactivity.this, "token", loginModel.getToken());
+                                        SharePreferenceUtil.put(Loginactivity.this, "userId", loginModel.getUserID());
+
+//                                        SharePreferenceUtil.put(Loginactivity.this, "token", "123");
                                         ToastUtil.showCenterToast(Loginactivity.this, "登录成功");
-                                        finish();
+                                        ToastUtil.showCenterToast(Loginactivity.this, loginModel.getToken());
+//                                        finish();
+                                        getUserInfo();
                                     } else {
                                         ToastUtil.showCenterToast(Loginactivity.this, loginModel.getErrorMessage());
                                     }
@@ -246,6 +248,79 @@ public class Loginactivity extends BaseActivity {
                 startActivity(new Intent(Loginactivity.this, ForgetActivity.class));
                 break;
         }
+    }
+
+
+    public void getUserInfo() {
+
+        String const_url = Constant.MODEL_URL + "ActionApi/login/UserInfo";
+
+//        http://221.208.29.24/
+//        http://221.208.29.24/webapi/ActionApi/login/UserInfo
+//        http://221.208.29.24/ActionApi/login /UserInfo
+        String token = (String) SharePreferenceUtil.get(Loginactivity.this, "token", "");
+        String userId = (String) SharePreferenceUtil.get(Loginactivity.this, "userId", "");
+        Toast.makeText(this, token + "", Toast.LENGTH_SHORT).show();
+
+        MyOkhttp.post(const_url)
+                .tag(this)
+                .params("gSys_UserID", userId)
+                .params("token", token)
+                .execute(new StringNoDialogCallback() {
+
+                    @Override
+                    public void onBefore(BaseRequest request) {
+                        super.onBefore(request);
+
+                        showLoading();
+                    }
+
+                    @Override
+                    public void onSuccess(String s, Call call, Response response) {
+                        Log.d(s, "eeeeeeeeeeeeeeeeeeeee");
+                        Log.d(s, "eeeeeeeeeeeeeeeeeeeee");
+                        Gson gson = new Gson();
+                        UserInfoBean userInfoBean = new UserInfoBean();
+                        userInfoBean = gson.fromJson(s, UserInfoBean.class);
+                        //gEmployeeID	用户唯一ID   数据类型 guid
+
+                        SharePreferenceUtil.put(Loginactivity.this, "gEmployeeID", userInfoBean.getGEmployeeID());
+//编号
+                        SharePreferenceUtil.put(Loginactivity.this, "cEmployeeID", userInfoBean.getCEmployeeID());
+//名称
+                        SharePreferenceUtil.put(Loginactivity.this, "cEmployeeName", userInfoBean.getCEmployeeName());
+
+//性别
+                        SharePreferenceUtil.put(Loginactivity.this, "cSex", userInfoBean.getCSex());
+
+                        //cPhone 手机号
+                        SharePreferenceUtil.put(Loginactivity.this, "cSex", userInfoBean.getCPhone());
+
+                        //cIdentityCard身份证号
+                        SharePreferenceUtil.put(Loginactivity.this, "cSex", userInfoBean.getCIdentityCard());
+
+                        //cAddress地址
+                        SharePreferenceUtil.put(Loginactivity.this, "cAddress", userInfoBean.getCAddress());
+                        //vRegistrationPhoto 注册照 图片64位编号字符串
+                        SharePreferenceUtil.put(Loginactivity.this, "vRegistrationPhoto", userInfoBean.getVRegistrationPhoto());
+
+
+                    }
+
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        super.onError(call, response, e);
+                        Log.d("33333333", "33333333333");
+
+                        dismissLoading();
+                    }
+
+                    @Override
+                    public void onAfter(String s, Exception e) {
+                        super.onAfter(s, e);
+                        dismissLoading();
+                    }
+                });
     }
 
 
