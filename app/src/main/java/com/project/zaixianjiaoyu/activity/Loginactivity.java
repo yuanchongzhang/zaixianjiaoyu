@@ -212,7 +212,7 @@ public class Loginactivity extends BaseActivity {
 
 //                                        SharePreferenceUtil.put(Loginactivity.this, "token", "123");
                                         ToastUtil.showCenterToast(Loginactivity.this, "登录成功");
-                                        ToastUtil.showCenterToast(Loginactivity.this, loginModel.getToken());
+
 //                                        finish();
                                         getUserInfo();
                                     } else {
@@ -260,7 +260,7 @@ public class Loginactivity extends BaseActivity {
 //        http://221.208.29.24/ActionApi/login /UserInfo
         String token = (String) SharePreferenceUtil.get(Loginactivity.this, "token", "");
         String userId = (String) SharePreferenceUtil.get(Loginactivity.this, "userId", "");
-        Toast.makeText(this, token + "", Toast.LENGTH_SHORT).show();
+
 
         MyOkhttp.post(const_url)
                 .tag(this)

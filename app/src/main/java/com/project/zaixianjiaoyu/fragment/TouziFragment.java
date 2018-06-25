@@ -3,6 +3,10 @@ package com.project.zaixianjiaoyu.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -19,13 +22,19 @@ import com.project.zaixianjiaoyu.Constant;
 import com.project.zaixianjiaoyu.R;
 import com.project.zaixianjiaoyu.activity.Loginactivity;
 import com.project.zaixianjiaoyu.activity.ShipinActivity;
+import com.project.zaixianjiaoyu.adapter.MyAdapter;
+import com.project.zaixianjiaoyu.adapter.PlanAdapter1;
 import com.project.zaixianjiaoyu.http.MyOkhttp;
 import com.project.zaixianjiaoyu.http.callback.StringNoDialogCallback;
 import com.project.zaixianjiaoyu.http.request.BaseRequest;
-import com.project.zaixianjiaoyu.model.UserInfoBean;
+import com.project.zaixianjiaoyu.model.PlanBean;
+import com.project.zaixianjiaoyu.model.ShangPin;
 import com.project.zaixianjiaoyu.statusbar.ImmersionBar;
 import com.project.zaixianjiaoyu.util.GlideCircleTransform;
 import com.project.zaixianjiaoyu.util.SharePreferenceUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -69,6 +78,11 @@ public class TouziFragment extends BaseFragment {
     TextView textOed;
     @BindView(R.id.layout_34)
     LinearLayout layout34;
+    @BindView(R.id.recycler_view_test_rv)
+    RecyclerView recyclerViewTestRv;
+    PlanAdapter1 myAdapter;
+    //    List<ShangPin.DataBean> contentBean3=new ArrayList<>();
+    List<PlanBean.DataBean> contentBean3 = new ArrayList<>();
 
     @Nullable
     @Override
@@ -86,7 +100,14 @@ public class TouziFragment extends BaseFragment {
                 .crossFade()
                 .transform(new GlideCircleTransform(getActivity()))
                 .into(imgPerson);
-        getUserInfo();
+        recyclerViewTestRv.setLayoutManager(new LinearLayoutManager(getActivity()));
+        String token = (String) SharePreferenceUtil.get(getActivity(), "token", "");
+        if (TextUtils.isEmpty(token)) {
+            startActivity(new Intent(getActivity(), Loginactivity.class));
+        } else {
+            getUserInfo();
+        }
+
 
         return view;
     }
@@ -169,6 +190,13 @@ public class TouziFragment extends BaseFragment {
                     public void onSuccess(String s, Call call, Response response) {
                         Log.d(s, "eeeeeeeeeeeeeeeeeeeee");
                         Log.d(s, "eeeeeeeeeeeeeeeeeeeee");
+                        Gson gson = new Gson();
+
+                        PlanBean planBean = new PlanBean();
+                        planBean = gson.fromJson(s, PlanBean.class);
+                        contentBean3 = planBean.getData();
+                        myAdapter = new PlanAdapter1(getActivity(), contentBean3);
+                        recyclerViewTestRv.setAdapter(myAdapter);
 
 
                     }
